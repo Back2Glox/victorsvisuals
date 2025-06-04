@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const fullSrc = currentItem.getAttribute('data-full-src');
         const caption = currentItem.getAttribute('data-caption');
 
+        // Show a loading indicator or handle broken image if fullSrc is invalid
         lightboxImage.src = fullSrc;
         lightboxImage.alt = caption; // Set alt text for accessibility
         lightboxCaption.textContent = caption;
