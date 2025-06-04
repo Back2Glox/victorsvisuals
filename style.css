@@ -4,7 +4,11 @@
 
 :root { --background: #1a1a1a; --foreground: #fce4ec; --accent: #ffb6c1; --text: #ffffff; --muted: #999999; }
 
-{ margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+.poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
 
 
 body { background-color: var(--background); color: var(--text); line-height: 1.6; padding: 20px; }
