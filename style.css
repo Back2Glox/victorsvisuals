@@ -21,9 +21,8 @@ body {
   background-color: var(--background);
   color: var(--text);
   line-height: 1.6;
-  padding: 20px;
+  padding: 0; /* Changed: Removed padding from body to allow hero to span full width */
   font-family: "Poppins", sans-serif;
-  /* Changed: Lighter default font-weight for body text */
   font-weight: 300;
 }
 
@@ -44,6 +43,8 @@ header {
   padding: 20px;
   background-color: #111;
   border-bottom: 1px solid #333;
+  position: relative; /* Ensure header is above hero if needed */
+  z-index: 10; /* Keep header on top */
 }
 
 .logo {
@@ -56,38 +57,92 @@ header {
 nav a {
   margin-left: 20px;
   color: var(--text);
-  /* Added: Transition for hover effect */
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
 nav a:hover {
-  text-decoration: none; /* Removed underline on hover for a cleaner look */
-  color: var(--accent); /* Highlight on hover */
-  transform: translateY(-2px); /* Subtle lift effect */
+  text-decoration: none;
+  color: var(--accent);
+  transform: translateY(-2px);
 }
 
 main {
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 0 20px;
+  /* Removed max-width and margin from main to allow hero to be full width */
+  padding: 0;
+  margin: 0;
 }
 
-h1, h2, h3 {
-  color: var(--foreground);
+/* NEW: Styles for the Hero Section */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 60vh; /* Adjust height as needed, using viewport height */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 40px; /* Space below the hero section */
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures image covers the area without distortion */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.hero-overlay {
+  position: relative;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay for text readability */
+  padding: 40px 20px;
+  border-radius: 10px;
+  max-width: 800px;
+}
+
+.hero-title {
+  font-size: clamp(2em, 5vw, 3.5em); /* Responsive font size */
   margin-bottom: 10px;
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-  /* Added: Subtle letter spacing for headings */
-  letter-spacing: 0.05em;
+  color: var(--foreground);
+  letter-spacing: 0.08em; /* Slightly more spacing for hero title */
 }
 
-/* NEW: Styles for the About page content */
+.hero-subtitle {
+  font-size: clamp(1em, 2.5vw, 1.5em); /* Responsive font size */
+  margin-bottom: 30px;
+  color: var(--text);
+  font-weight: 300;
+}
+
+.hero-button {
+  font-size: 1.1em;
+  padding: 12px 25px;
+}
+
+/* Existing "Latest Work" section styling, now within its own section */
+.latest-work-section {
+    max-width: 1000px; /* Constrain content width */
+    margin: 40px auto; /* Center content */
+    padding: 0 20px; /* Add padding for smaller screens */
+    text-align: center; /* Center the heading */
+}
+
+
+/* Styles for the About page content */
 .about-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: 20px;
+  max-width: 1000px; /* Added max-width to about-content */
+  margin: 40px auto; /* Centered about-content */
+  padding: 0 20px; /* Added padding */
 }
 
 .about-content h2 {
@@ -102,13 +157,12 @@ h1, h2, h3 {
 }
 
 .profile-picture {
-  /* UPDATED: Made responsive and maintains aspect ratio */
-  width: min(180px, 80vw); /* Limits max width to 180px, but shrinks to 80% of viewport width if smaller */
-  aspect-ratio: 1 / 1;    /* Ensures the container is always a perfect square */
-  border-radius: 50%;    /* Makes it a circle */
-  object-fit: cover;     /* Fills the circular container without distorting the image */
-  border: 3px solid var(--accent); /* Accent border */
-  box-shadow: 0 0 15px rgba(255, 182, 193, 0.3); /* Subtle glow */
+  width: min(180px, 80vw);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 15px rgba(255, 182, 193, 0.3);
   margin-bottom: 20px;
 }
 
@@ -137,6 +191,7 @@ h1, h2, h3 {
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+  margin-top: 20px; /* Added margin-top for spacing */
 }
 
 .highlight-imgs img {
@@ -166,13 +221,13 @@ footer {
   border-radius: 20px;
   cursor: pointer;
   font-weight: 600;
-  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out; /* Added transform transition */
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .button:hover {
   background-color: #ff99aa;
-  transform: translateY(-2px); /* Subtle lift on hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Added subtle shadow on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 600px) {
@@ -183,9 +238,18 @@ footer {
   nav a {
     margin: 10px 0 0 0;
   }
-  /* NEW: Adjustments for about page on small screens */
+  .hero-overlay {
+    padding: 20px 15px; /* Adjust padding for smaller screens */
+  }
+  .hero-title {
+    font-size: 2em; /* Smaller font size on mobile */
+  }
+  .hero-subtitle {
+    font-size: 1em; /* Smaller font size on mobile */
+  }
+  /* Adjustments for about page on small screens */
   .about-content {
-    text-align: left; /* Align text left on small screens */
+    text-align: left;
     align-items: flex-start;
   }
 }
