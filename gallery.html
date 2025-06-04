@@ -6,6 +6,8 @@
   <title>Gallery - Victor's Visuals</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="favicon.png" type="image/png" />
+  <!-- NEW: Font Awesome for social media icons (if you decide to use them later) and lightbox arrows -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
   <header>
@@ -23,16 +25,53 @@
     <p>Explore by category:</p>
 
     <div class="gallery-grid">
-      <!-- Example placeholder images per category -->
-      <img src="space1.jpg" alt="Space">
-      <img src="sky1.jpg" alt="Sky">
-      <img src="animals1.jpg" alt="Animals">
-      <img src="nature1.jpg" alt="Nature">
+      <!-- Each image is now wrapped in an <a> tag with data attributes for the lightbox -->
+      <!-- data-full-src: path to the full-size image for the lightbox -->
+      <!-- data-caption: text for the image caption -->
+
+      <a href="#" class="gallery-item" data-full-src="space1.jpg" data-caption="A breathtaking view of the cosmos.">
+        <img src="space1.jpg" alt="Space">
+      </a>
+      <a href="#" class="gallery-item" data-full-src="sky1.jpg" data-caption="Vibrant hues painting the evening sky.">
+        <img src="sky1.jpg" alt="Sky">
+      </a>
+      <a href="#" class="gallery-item" data-full-src="animals1.jpg" data-caption="A majestic creature in its natural habitat.">
+        <img src="animals1.jpg" alt="Animals">
+      </a>
+      <a href="#" class="gallery-item" data-full-src="nature1.jpg" data-caption="Serene landscapes, untouched beauty.">
+        <img src="nature1.jpg" alt="Nature">
+      </a>
+      <a href="#" class="gallery-item" data-full-src="space2.jpg" data-caption="Distant galaxies swirling in the dark.">
+        <img src="https://placehold.co/600x400/1a1a1a/fce4ec?text=Space+2" alt="Space 2"> <!-- Placeholder if you don't have space2.jpg -->
+      </a>
+      <a href="#" class="gallery-item" data-full-src="sky2.jpg" data-caption="Clouds dancing across a clear blue sky.">
+        <img src="https://placehold.co/600x400/1a1a1a/fce4ec?text=Sky+2" alt="Sky 2"> <!-- Placeholder if you don't have sky2.jpg -->
+      </a>
+      <a href="#" class="gallery-item" data-full-src="animals2.jpg" data-caption="A curious gaze from the wild.">
+        <img src="https://placehold.co/600x400/1a1a1a/fce4ec?text=Animals+2" alt="Animals 2"> <!-- Placeholder if you don't have animals2.jpg -->
+      </a>
+      <a href="#" class="gallery-item" data-full-src="nature2.jpg" data-caption="Lush greenery and tranquil waters.">
+        <img src="https://placehold.co/600x400/1a1a1a/fce4ec?text=Nature+2" alt="Nature 2"> <!-- Placeholder if you don't have nature2.jpg -->
+      </a>
     </div>
   </main>
+
+  <!-- NEW: Lightbox Modal Structure -->
+  <div id="lightbox-overlay">
+    <div id="lightbox-container">
+      <button id="lightbox-close" aria-label="Close Lightbox"><i class="fas fa-times"></i></button>
+      <img id="lightbox-image" src="" alt="Gallery Image">
+      <div id="lightbox-caption"></div>
+      <button id="lightbox-prev" class="lightbox-nav" aria-label="Previous Image"><i class="fas fa-chevron-left"></i></button>
+      <button id="lightbox-next" class="lightbox-nav" aria-label="Next Image"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
 
   <footer>
     <p>© 2025 Victor Townsend</p>
   </footer>
+
+  <!-- NEW: Link to your JavaScript file -->
+  <script src="script.js"></script>
 </body>
 </html>
