@@ -1,255 +1,442 @@
-/* style.css */
+/* style.css - Enhanced Version */
 
-/* Updated: Added 700 weight to the Google Fonts import */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+/* Google Fonts Import: Poppins with various weights */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
+/* Root CSS Variables for consistent theming */
 :root {
   --background: #1a1a1a;
-  --foreground: #fce4ec;
-  --accent: #ffb6c1;
-  --text: #ffffff;
-  --muted: #999999;
+  --foreground: #fce4ec; /* A soft pinkish-white */
+  --accent: #ffb6c1;     /* Light pink accent */
+  --text: #ffffff;       /* Pure white text */
+  --muted: #999999;      /* Muted gray for secondary text */
+  --dark-gray: #111111;  /* Darker gray for header/footer backgrounds */
+  --medium-gray: #333333; /* Medium gray for borders/dividers */
+  --shadow-dark: rgba(0, 0, 0, 0.5); /* Dark shadow for depth */
+  --shadow-light: rgba(255, 182, 193, 0.3); /* Light glow for accent */
 }
 
-.poppins-bold {
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-}
-
+/* Base Styles for Body and Global Elements */
 body {
   background-color: var(--background);
   color: var(--text);
   line-height: 1.6;
-  padding: 0; /* Changed: Removed padding from body to allow hero to span full width */
+  padding: 0; /* Removed body padding to allow full-width sections */
   font-family: "Poppins", sans-serif;
-  font-weight: 300;
+  font-weight: 300; /* Lighter default font-weight for body text */
+  margin: 0; /* Ensure no default body margin */
+  overflow-x: hidden; /* Prevent horizontal scrollbar from overflow */
+  scroll-behavior: smooth; /* Smooth scrolling for anchor links */
 }
 
+/* Custom Scrollbar Styling (Webkit browsers like Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff99aa;
+}
+
+/* Global Link Styles */
 a {
   color: var(--accent);
   text-decoration: none;
-  transition: 0.3s;
+  transition: color 0.3s ease, transform 0.3s ease; /* Added transform transition */
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration: none; /* Removed default underline on hover for cleaner look */
+  color: var(--foreground); /* Change to foreground color on hover */
+  transform: translateY(-1px); /* Subtle lift effect */
 }
 
+/* Focus States for Accessibility */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--accent); /* Highlight focused elements */
+  outline-offset: 3px;
+  border-radius: 4px; /* Match element's rounded corners */
+}
+
+/* Header Section */
 header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
-  background-color: #111;
-  border-bottom: 1px solid #333;
-  position: relative; /* Ensure header is above hero if needed */
-  z-index: 10; /* Keep header on top */
+  padding: 20px 40px; /* Increased horizontal padding */
+  background-color: var(--dark-gray);
+  border-bottom: 1px solid var(--medium-gray);
+  position: relative;
+  z-index: 10; /* Ensure header stays on top of other content */
+  box-shadow: 0 2px 10px var(--shadow-dark); /* Subtle shadow for depth */
 }
 
 .logo {
   font-weight: 600;
-  font-size: 24px;
+  font-size: 28px; /* Slightly larger logo */
   color: var(--accent);
   cursor: pointer;
+  letter-spacing: 0.05em; /* Add some letter spacing */
 }
 
+/* Navigation Links */
 nav a {
-  margin-left: 20px;
+  margin-left: 30px; /* Increased spacing between nav links */
   color: var(--text);
-  transition: color 0.3s ease, transform 0.3s ease;
+  font-weight: 400; /* Slightly bolder for better readability */
+  position: relative; /* For underline animation */
 }
 
-nav a:hover {
-  text-decoration: none;
-  color: var(--accent);
-  transform: translateY(-2px);
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: var(--accent);
+  transition: width 0.3s ease-out; /* Underline animation */
 }
 
+nav a:hover::after {
+  width: 100%;
+}
+
+/* Main Content Area */
 main {
-  /* Removed max-width and margin from main to allow hero to be full width */
-  padding: 0;
+  padding: 0; /* Main padding removed to allow hero to be full width */
   margin: 0;
 }
 
-/* NEW: Styles for the Hero Section */
+/* Hero Section Styles */
 .hero-section {
   position: relative;
   width: 100%;
-  height: 60vh; /* Adjust height as needed, using viewport height */
+  height: 70vh; /* Increased height for more impact */
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--text);
   text-align: center;
-  margin-bottom: 40px; /* Space below the hero section */
+  margin-bottom: 60px; /* More space below the hero section */
 }
 
 .hero-image {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures image covers the area without distortion */
+  object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
+  filter: brightness(0.7); /* Slightly darken image for text readability */
 }
 
 .hero-overlay {
   position: relative;
   z-index: 2;
-  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay for text readability */
-  padding: 40px 20px;
-  border-radius: 10px;
-  max-width: 800px;
+  background-color: rgba(0, 0, 0, 0.5); /* Slightly darker overlay */
+  padding: 50px 30px; /* Increased padding */
+  border-radius: 12px; /* Slightly more rounded corners */
+  max-width: 900px; /* Increased max-width */
+  box-shadow: 0 8px 25px var(--shadow-dark); /* More pronounced shadow */
+  animation: fadeInScale 1s ease-out; /* Animation on load */
 }
 
 .hero-title {
-  font-size: clamp(2em, 5vw, 3.5em); /* Responsive font size */
-  margin-bottom: 10px;
+  font-size: clamp(2.5em, 6vw, 4.5em); /* Larger responsive font size */
+  margin-bottom: 15px;
   color: var(--foreground);
-  letter-spacing: 0.08em; /* Slightly more spacing for hero title */
+  letter-spacing: 0.1em; /* More letter spacing for hero title */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Text shadow for pop */
 }
 
 .hero-subtitle {
-  font-size: clamp(1em, 2.5vw, 1.5em); /* Responsive font size */
-  margin-bottom: 30px;
+  font-size: clamp(1.1em, 2.8vw, 1.8em); /* Larger responsive font size */
+  margin-bottom: 40px;
   color: var(--text);
   font-weight: 300;
+  max-width: 600px; /* Constrain subtitle width */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero-button {
-  font-size: 1.1em;
-  padding: 12px 25px;
+  font-size: 1.2em; /* Larger button text */
+  padding: 15px 30px; /* Larger button padding */
 }
 
-/* Existing "Latest Work" section styling, now within its own section */
+/* Latest Work Section */
 .latest-work-section {
-    max-width: 1000px; /* Constrain content width */
-    margin: 40px auto; /* Center content */
-    padding: 0 20px; /* Add padding for smaller screens */
-    text-align: center; /* Center the heading */
+    max-width: 1000px;
+    margin: 60px auto; /* Increased top margin */
+    padding: 0 20px;
+    text-align: center;
 }
 
+.latest-work-section h2 {
+    margin-bottom: 40px; /* More space below heading */
+}
 
-/* Styles for the About page content */
+/* About Page Content */
 .about-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 20px;
-  max-width: 1000px; /* Added max-width to about-content */
-  margin: 40px auto; /* Centered about-content */
-  padding: 0 20px; /* Added padding */
+  gap: 25px; /* Increased gap */
+  max-width: 1000px;
+  margin: 60px auto; /* Increased top margin */
+  padding: 0 20px;
 }
 
 .about-content h2 {
   margin-top: 30px;
   margin-bottom: 15px;
+  letter-spacing: 0.06em; /* Slightly more spacing for subheadings */
 }
 
 .about-content p {
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+  font-weight: 300; /* Ensure consistent body text weight */
 }
 
 .profile-picture {
-  width: min(180px, 80vw);
+  width: min(200px, 70vw); /* Slightly larger max size, more responsive */
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid var(--accent);
-  box-shadow: 0 0 15px rgba(255, 182, 193, 0.3);
-  margin-bottom: 20px;
+  border: 4px solid var(--accent); /* Thicker accent border */
+  box-shadow: 0 0 20px var(--shadow-light); /* More pronounced glow */
+  margin-bottom: 25px;
+  transition: transform 0.3s ease; /* Added transition for hover effect */
 }
 
+.profile-picture:hover {
+  transform: scale(1.05); /* Subtle zoom on hover */
+}
+
+/* Gallery Grid */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly larger min column width */
+  gap: 25px; /* Increased gap */
 }
 
 .gallery-grid img {
   width: 100%;
   height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  transition: transform 0.2s ease-in-out;
+  border-radius: 10px; /* Slightly more rounded corners */
+  box-shadow: 0 6px 15px var(--shadow-dark); /* More pronounced shadow */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Added box-shadow transition */
   object-fit: cover;
-  max-height: 400px;
+  max-height: 450px; /* Slightly increased max-height */
 }
 
 .gallery-grid img:hover {
-  transform: scale(1.03);
+  transform: scale(1.04); /* Slightly larger zoom on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7); /* Darker shadow on hover */
 }
 
+/* Highlight Images (used on index.html) */
 .highlight-imgs {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 25px; /* Increased gap */
   justify-content: center;
-  margin-top: 20px; /* Added margin-top for spacing */
+  margin-top: 30px; /* More space below heading */
 }
 
 .highlight-imgs img {
   max-width: 100%;
   height: auto;
   object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  transition: transform 0.2s ease-in-out;
-  max-height: 400px;
+  border-radius: 10px; /* Slightly more rounded corners */
+  box-shadow: 0 6px 15px var(--shadow-dark); /* More pronounced shadow */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Added box-shadow transition */
+  max-height: 450px; /* Slightly increased max-height */
 }
 
+.highlight-imgs img:hover {
+  transform: scale(1.04); /* Slightly larger zoom on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7); /* Darker shadow on hover */
+}
+
+/* Footer Section */
 footer {
   text-align: center;
-  padding: 20px;
-  font-size: 14px;
+  padding: 30px 20px; /* Increased padding */
+  font-size: 15px; /* Slightly larger font size */
   color: var(--muted);
-  border-top: 1px solid #333;
-  margin-top: 60px;
+  border-top: 1px solid var(--medium-gray);
+  margin-top: 80px; /* More space above footer */
+  background-color: var(--dark-gray); /* Match header background */
 }
 
+/* Social Media Icons (Placeholder styles) */
+.social-links {
+  margin-top: 15px;
+}
+
+.social-links a {
+  display: inline-block;
+  margin: 0 10px;
+  font-size: 24px; /* Icon size */
+  color: var(--muted);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--accent);
+  transform: translateY(-3px) scale(1.1);
+}
+
+/* Buttons */
 .button {
   background-color: var(--accent);
-  color: #000;
-  padding: 10px 20px;
+  color: var(--background); /* Dark text on accent button */
+  padding: 12px 28px; /* Adjusted padding */
   border: none;
-  border-radius: 20px;
+  border-radius: 25px; /* More rounded button */
   cursor: pointer;
   font-weight: 600;
-  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+  text-transform: uppercase; /* Uppercase text */
+  letter-spacing: 0.05em; /* Letter spacing for buttons */
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .button:hover {
-  background-color: #ff99aa;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background-color: #ff99aa; /* Slightly darker accent on hover */
+  transform: translateY(-3px); /* More pronounced lift on hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* More pronounced shadow on hover */
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+/* Keyframe Animations */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  header {
+    padding: 15px 20px;
+  }
+  .logo {
+    font-size: 24px;
+  }
+  nav a {
+    margin-left: 20px;
+  }
+  .hero-section {
+    height: 60vh; /* Slightly smaller hero on tablets */
+    margin-bottom: 40px;
+  }
+  .hero-title {
+    font-size: clamp(2em, 5vw, 3.5em);
+  }
+  .hero-subtitle {
+    font-size: clamp(0.9em, 2.5vw, 1.3em);
+  }
+  .hero-overlay {
+    padding: 30px 20px;
+  }
+  .latest-work-section,
+  .about-content {
+    margin: 40px auto;
+  }
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Smaller min column for gallery */
+    gap: 20px;
+  }
+  .highlight-imgs {
+    gap: 20px;
+  }
 }
 
 @media (max-width: 600px) {
   header {
     flex-direction: column;
     align-items: flex-start;
+    padding: 15px;
+  }
+  nav {
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
   nav a {
-    margin: 10px 0 0 0;
+    margin: 8px 0; /* Stack nav links vertically */
+  }
+  .hero-section {
+    height: 50vh; /* Even smaller hero on mobile */
+    margin-bottom: 30px;
   }
   .hero-overlay {
-    padding: 20px 15px; /* Adjust padding for smaller screens */
+    padding: 20px 15px;
   }
   .hero-title {
-    font-size: 2em; /* Smaller font size on mobile */
+    font-size: 2em;
+    letter-spacing: 0.05em;
   }
   .hero-subtitle {
-    font-size: 1em; /* Smaller font size on mobile */
+    font-size: 1em;
+    margin-bottom: 20px;
   }
-  /* Adjustments for about page on small screens */
+  .hero-button {
+    font-size: 1em;
+    padding: 10px 20px;
+  }
   .about-content {
     text-align: left;
     align-items: flex-start;
+    gap: 15px;
+  }
+  .profile-picture {
+    width: min(150px, 60vw); /* Smaller profile picture on mobile */
+  }
+  footer {
+    margin-top: 40px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero-title {
+    font-size: 1.8em;
+  }
+  .hero-subtitle {
+    font-size: 0.9em;
+  }
+  .gallery-grid {
+    grid-template-columns: 1fr; /* Single column on very small screens */
   }
 }
