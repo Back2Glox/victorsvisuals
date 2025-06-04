@@ -22,9 +22,9 @@ body {
   color: var(--text);
   line-height: 1.6;
   padding: 20px;
-  /* NEW: Apply Poppins font to the entire body */
   font-family: "Poppins", sans-serif;
-  font-weight: 400; /* Set a default weight for the body text */
+  /* Changed: Lighter default font-weight for body text */
+  font-weight: 300;
 }
 
 a {
@@ -56,6 +56,14 @@ header {
 nav a {
   margin-left: 20px;
   color: var(--text);
+  /* Added: Transition for hover effect */
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+nav a:hover {
+  text-decoration: none; /* Removed underline on hover for a cleaner look */
+  color: var(--accent); /* Highlight on hover */
+  transform: translateY(-2px); /* Subtle lift effect */
 }
 
 main {
@@ -67,9 +75,10 @@ main {
 h1, h2, h3 {
   color: var(--foreground);
   margin-bottom: 10px;
-  /* Optional: Apply Poppins to headings specifically if you want a different weight */
   font-family: "Poppins", sans-serif;
-  font-weight: 600; /* Example: using a semi-bold for headings */
+  font-weight: 600;
+  /* Added: Subtle letter spacing for headings */
+  letter-spacing: 0.05em;
 }
 
 .gallery-grid {
@@ -126,11 +135,13 @@ footer {
   border-radius: 20px;
   cursor: pointer;
   font-weight: 600;
-  transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out; /* Added transform transition */
 }
 
 .button:hover {
   background-color: #ff99aa;
+  transform: translateY(-2px); /* Subtle lift on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Added subtle shadow on hover */
 }
 
 @media (max-width: 600px) {
