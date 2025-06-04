@@ -81,6 +81,37 @@ h1, h2, h3 {
   letter-spacing: 0.05em;
 }
 
+/* NEW: Styles for the About page content */
+.about-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.about-content h2 {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.about-content p {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-picture {
+  /* UPDATED: Made responsive and maintains aspect ratio */
+  width: min(180px, 80vw); /* Limits max width to 180px, but shrinks to 80% of viewport width if smaller */
+  aspect-ratio: 1 / 1;    /* Ensures the container is always a perfect square */
+  border-radius: 50%;    /* Makes it a circle */
+  object-fit: cover;     /* Fills the circular container without distorting the image */
+  border: 3px solid var(--accent); /* Accent border */
+  box-shadow: 0 0 15px rgba(255, 182, 193, 0.3); /* Subtle glow */
+  margin-bottom: 20px;
+}
+
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -151,5 +182,10 @@ footer {
   }
   nav a {
     margin: 10px 0 0 0;
+  }
+  /* NEW: Adjustments for about page on small screens */
+  .about-content {
+    text-align: left; /* Align text left on small screens */
+    align-items: flex-start;
   }
 }
