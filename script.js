@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Image Comparison Slider Elements ---
     const comparisonContainer = document.getElementById('nightchrome-comparison');
-    let comparisonOverlay, comparisonHandle; // Will be set if container exists
+    let imageBefore, comparisonHandle; // Will be set if container exists
 
     // --- Lightbox Functions ---
 
@@ -90,32 +90,26 @@ document.addEventListener('DOMContentLoaded', () => {
     function initializeImageComparison(container) {
         if (!container) return; // Exit if container doesn't exist
 
-        comparisonOverlay = container.querySelector('.comparison-overlay');
+        imageBefore = container.querySelector('.comparison-image-before'); // Select the 'before' image directly
         comparisonHandle = container.querySelector('.comparison-handle');
 
         let isDragging = false;
 
-        // Function to update the slider position
+        // Function to update the slider position based on mouse/touch X coordinate
         function slide(clientX) {
             const containerRect = container.getBoundingClientRect();
             let x = clientX - containerRect.left; // X position relative to container
 
-            // Clamp x to be within container bounds
+            // Clamp x to be within container bounds (from 0 to container width)
             if (x < 0) x = 0;
             if (x > containerRect.width) x = containerRect.width;
 
             const percentage = (x / containerRect.width) * 100;
 
-            // The overlay's width determines how much of the 'before' image is visible
-            comparisonOverlay.style.width = `${percentage}%`;
-            // The handle's left position moves with the overlay's edge
+            // Control the width of the 'before' image to reveal/hide it
+            imageBefore.style.width = `${percentage}%`;
+            // Move the handle with the edge of the 'before' image
             comparisonHandle.style.left = `${percentage}%`;
-            
-            // The image inside the overlay needs to be translated to perfectly align
-            // with the background image as the overlay width changes.
-            // This makes sure the 'before' image content stays in place,
-            // and only the clipping mask (overlay) changes.
-            comparisonOverlay.querySelector('.comparison-image').style.transform = `translateX(-${100 - percentage}%)`;
         }
 
         // Mouse events for desktop
@@ -155,8 +149,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { passive: false });
         
         // Initial positioning: Set slider to the middle initially
-        const initialX = container.getBoundingClientRect().left + container.getBoundingClientRect().width / 2;
-        slide(initialX); 
+        // Use a small delay to ensure images have loaded and dimensions are correct
+        setTimeout(() => {
+            const initialX = container.getBoundingClientRect().left + container.getBoundingClientRect().width / 2;
+            slide(initialX); 
+        }, 100); // 100ms delay
+
+        // Add a resize listener to re-initialize slider position on window resize
+        // This is crucial for responsiveness on different screen sizes and orientation changes
+        window.addEventListener('resize', () => {
+            // Get the current position of the handle relative to the container
+            const handleCurrentLeft = comparisonHandle.getBoundingClientRect().left - container.getBoundingClientRect().left;
+            slide(handleCurrentLeft); // Re-adjust based on current handle position
+        });
     }
 
 
