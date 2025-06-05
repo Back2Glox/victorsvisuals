@@ -1,4 +1,4 @@
-/* style.css - Complete and Updated Version with All Styles */
+/* style.css - Complete and Updated Version with True Before/After Slider Styles */
 
 /* Google Fonts Import: Poppins with various weights */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
@@ -735,9 +735,9 @@ footer {
 .service-card .button {
   margin-top: auto;
   width: 100%;
-  max-width: 250px; /* NEW: Limit the maximum width of the button */
-  margin-left: auto; /* NEW: Center the button */
-  margin-right: auto; /* NEW: Center the button */
+  max-width: 250px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .service-card.highlight {
@@ -781,6 +781,122 @@ footer {
   font-size: 1.05em;
   line-height: 1.7;
 }
+
+/* NEW: Image Comparison Slider Styles for two separate images */
+.image-comparison-container {
+  position: relative;
+  width: 100%;
+  /* Assuming a 3:2 aspect ratio for the images, e.g., 600x400. Adjust if your images have a different ratio. */
+  padding-top: 66.66%; /* (image-height / image-width) * 100% */
+  overflow: hidden;
+  border-radius: 8px;
+  margin: 25px auto;
+  cursor: ew-resize; /* East-west resize cursor */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.comparison-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the container */
+  display: block;
+}
+
+.comparison-overlay {
+  position: absolute;
+  top: 0;
+  /* NEW: Start fully covering the 'after' image */
+  left: 0;
+  width: 50%; /* Default starting point: half of the 'before' image visible */
+  height: 100%;
+  overflow: hidden; /* This is what clips the 'before' image */
+}
+
+.comparison-overlay .comparison-image {
+  /* This image is the 'BEFORE' image, and it must always align with the base 'AFTER' image */
+  position: absolute;
+  top: 0;
+  left: 0; /* Keep this at 0, the clipping will be done by the overlay's width */
+  width: 100%; /* Must match the width of the main container, not the overlay */
+  height: 100%;
+  object-fit: cover;
+}
+
+.comparison-handle {
+  position: absolute;
+  top: 0;
+  left: 50%; /* Start in the middle */
+  width: 4px; /* Handle bar thickness */
+  height: 100%;
+  background-color: var(--foreground); /* Handle color */
+  transform: translateX(-50%); /* Center the handle */
+  cursor: ew-resize;
+  z-index: 10;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comparison-handle::before,
+.comparison-handle::after {
+  content: '';
+  position: absolute;
+  width: 20px; /* Width of the little draggable circles */
+  height: 20px;
+  background-color: var(--foreground);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 11;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+  transition: background-color 0.2s ease;
+}
+
+.comparison-handle::before {
+  left: -10px; /* Position to the left of the handle bar */
+}
+
+.comparison-handle::after {
+  right: -10px; /* Position to the right of the handle bar */
+}
+
+.comparison-handle:hover::before,
+.comparison-handle:hover::after {
+  background-color: var(--accent); /* Change color on hover */
+}
+
+.comparison-label {
+  position: absolute;
+  top: 15px;
+  padding: 5px 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: var(--text);
+  font-size: 0.9em;
+  font-weight: 500;
+  border-radius: 5px;
+  z-index: 2;
+  text-transform: uppercase;
+}
+
+.comparison-label.before {
+  left: 15px;
+}
+
+.comparison-label.after {
+  right: 15px;
+}
+
+.comparison-caption {
+  font-size: 0.9em;
+  color: var(--muted);
+  margin-top: 10px;
+  text-align: center;
+}
+
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
@@ -844,16 +960,26 @@ footer {
   }
   /* Services page adjustments for tablets */
   .service-card-container {
-    flex-direction: column; /* Stack cards on tablets */
+    flex-direction: column;
     align-items: center;
   }
   .service-card {
     width: 90%;
-    max-width: 400px; /* Limit width of stacked cards */
+    max-width: 400px;
   }
   .badge {
     top: -10px;
     right: 10px;
+  }
+  /* Image comparison adjustments for tablets */
+  .image-comparison-container {
+    width: 90%;
+    padding-top: 60%;
+  }
+  .comparison-label {
+    font-size: 0.8em;
+    top: 10px;
+    padding: 3px 6px;
   }
 }
 
@@ -894,7 +1020,6 @@ footer {
   .about-content {
     text-align: left;
     align-items: flex-start;
-    gap: 15px;
   }
   .profile-picture {
     width: min(150px, 60vw);
@@ -960,6 +1085,16 @@ footer {
   }
   .workflow-info h3 {
     font-size: 1.3em;
+  }
+  /* Image comparison adjustments for mobile */
+  .image-comparison-container {
+    width: 100%;
+    margin: 20px auto;
+  }
+  .comparison-label {
+    font-size: 0.7em;
+    top: 8px;
+    padding: 3px 6px;
   }
 }
 
