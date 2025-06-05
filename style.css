@@ -1,4 +1,4 @@
-/* style.css - Enhanced Version with Lightbox Styles */
+/* style.css - Enhanced Version with Gallery Filter Styles */
 
 /* Google Fonts Import: Poppins with various weights */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
@@ -231,6 +231,44 @@ main {
   transform: scale(1.05); /* Subtle zoom on hover */
 }
 
+/* Gallery Filter Buttons */
+.gallery-filters {
+  text-align: center;
+  margin: 40px auto 30px auto; /* Centered with spacing */
+  max-width: 1000px;
+  padding: 0 20px;
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  justify-content: center;
+  gap: 15px; /* Space between buttons */
+}
+
+.filter-button {
+  background-color: var(--dark-gray);
+  color: var(--text);
+  border: 1px solid var(--medium-gray);
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 400;
+  transition: all 0.3s ease;
+}
+
+.filter-button:hover {
+  background-color: var(--medium-gray);
+  color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.filter-button.active {
+  background-color: var(--accent);
+  color: var(--background); /* Dark text on active accent button */
+  border-color: var(--accent);
+  font-weight: 600;
+  box-shadow: 0 4px 10px var(--shadow-light);
+}
+
 /* Gallery Grid */
 .gallery-grid {
   display: grid;
@@ -247,7 +285,7 @@ main {
   overflow: hidden;
   border-radius: 10px; /* Match image border-radius */
   box-shadow: 0 6px 15px var(--shadow-dark); /* More pronounced shadow */
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.5s ease; /* Added opacity transition for filtering */
 }
 
 .gallery-grid .gallery-item:hover {
@@ -263,6 +301,23 @@ main {
   border-radius: 10px; /* Slightly more rounded corners */
   display: block; /* Remove extra space below image */
 }
+
+/* Hidden state for filtered items */
+.gallery-grid .gallery-item.hidden {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none; /* Make item unclickable when hidden */
+  height: 0; /* Collapse height to remove from flow */
+  margin: 0; /* Remove margin when hidden */
+  transition: opacity 0.5s ease, transform 0.5s ease, height 0s 0.5s, margin 0s 0.5s; /* Delay height/margin transition */
+}
+/* Visible state for filtered items - reset properties */
+.gallery-grid .gallery-item:not(.hidden) {
+    height: 300px; /* Restore height */
+    margin-bottom: 25px; /* Restore margin-bottom if needed by grid gap */
+    transition: opacity 0.5s ease, transform 0.5s ease, height 0s, margin 0s; /* No delay on showing */
+}
+
 
 /* Highlight Images (used on index.html) */
 .highlight-imgs {
@@ -354,7 +409,7 @@ footer {
   }
 }
 
-/* NEW: Lightbox Styles */
+/* Lightbox Styles */
 #lightbox-overlay {
   display: none; /* Hidden by default */
   position: fixed; /* Stays in place even when scrolling */
@@ -459,6 +514,136 @@ footer {
   right: 15px;
 }
 
+/* Contact Page Styles */
+.contact-section {
+  max-width: 900px; /* Max width for the contact content */
+  margin: 60px auto; /* Center the section */
+  padding: 0 20px; /* Add padding for smaller screens */
+  text-align: center; /* Center the main heading and intro */
+}
+
+.contact-intro {
+  font-size: 1.1em;
+  margin-bottom: 40px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.8;
+}
+
+.contact-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  gap: 40px; /* Space between form and details */
+  justify-content: center;
+  align-items: flex-start; /* Align items to the top */
+  margin-top: 40px;
+}
+
+.contact-form-wrapper,
+.contact-details-wrapper {
+  background-color: var(--dark-gray);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px var(--shadow-dark);
+  flex: 1; /* Allow items to grow and shrink */
+  min-width: 300px; /* Minimum width before wrapping */
+  text-align: left; /* Align text inside these wrappers to left */
+}
+
+.contact-form-wrapper h2,
+.contact-details-wrapper h2 {
+  color: var(--foreground);
+  margin-top: 0;
+  margin-bottom: 25px;
+  text-align: center; /* Center headings within wrappers */
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text);
+  font-weight: 400;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+  width: calc(100% - 20px); /* Account for padding */
+  padding: 12px 10px;
+  border: 1px solid var(--medium-gray);
+  border-radius: 5px;
+  background-color: var(--background);
+  color: var(--text);
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(255, 182, 193, 0.5);
+  outline: none;
+}
+
+.contact-form textarea {
+  resize: vertical; /* Allow vertical resizing */
+  min-height: 120px;
+}
+
+.contact-form .button {
+  width: 100%; /* Full width button */
+  margin-top: 10px;
+}
+
+.contact-links {
+  list-style: none; /* Remove bullet points */
+  padding: 0;
+  margin: 0;
+}
+
+.contact-links li {
+  margin-bottom: 15px;
+}
+
+.contact-links a {
+  display: flex; /* Align icon and text */
+  align-items: center;
+  color: var(--text); /* Default text color */
+  font-size: 1.1em;
+}
+
+.contact-links a i {
+  margin-right: 10px;
+  color: var(--accent); /* Icon color */
+  font-size: 1.3em;
+}
+
+.contact-links a:hover {
+  color: var(--accent); /* Highlight link on hover */
+  transform: translateX(5px); /* Subtle slide effect */
+}
+
+.contact-details-wrapper p {
+  margin-bottom: 10px;
+  font-size: 1em;
+}
+
+.contact-details-wrapper h3 {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  color: var(--foreground);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   header {
@@ -484,7 +669,8 @@ footer {
     padding: 30px 20px;
   }
   .latest-work-section,
-  .about-content {
+  .about-content,
+  .contact-section { /* Added contact-section */
     margin: 40px auto;
   }
   .gallery-grid {
@@ -507,13 +693,22 @@ footer {
     font-size: 1.8em;
     padding: 10px;
   }
+  /* Contact form adjustments for tablets */
+  .contact-container {
+    flex-direction: column; /* Stack columns on tablets */
+    align-items: center;
+  }
+  .contact-form-wrapper,
+  .contact-details-wrapper {
+    width: 90%; /* Take more width when stacked */
+    min-width: unset; /* Remove min-width constraint */
+  }
 }
 
 @media (max-width: 600px) {
   header {
     flex-direction: column;
     align-items: flex-start;
-    padding: 15px;
   }
   nav {
     width: 100%;
@@ -577,6 +772,16 @@ footer {
   }
   #lightbox-next {
     right: 5px;
+  }
+  /* Contact form adjustments for mobile */
+  .contact-form-wrapper,
+  .contact-details-wrapper {
+    width: 100%; /* Full width on mobile */
+    padding: 20px;
+  }
+  .contact-intro {
+    font-size: 1em;
+    margin-bottom: 20px;
   }
 }
 
