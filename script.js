@@ -1,10 +1,8 @@
-// script.js - Handles the interactive gallery (lightbox) functionality
+// script.js - Handles the interactive gallery (lightbox) and category filtering functionality
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Get all gallery items (the clickable image links)
+    // --- Lightbox Elements ---
     const galleryItems = document.querySelectorAll('.gallery-item');
-
-    // Get lightbox elements
     const lightboxOverlay = document.getElementById('lightbox-overlay');
     const lightboxImage = document.getElementById('lightbox-image');
     const lightboxCaption = document.getElementById('lightbox-caption');
@@ -14,10 +12,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentImageIndex = 0; // To keep track of the currently displayed image
 
+    // --- Gallery Filter Elements ---
+    const filterButtons = document.querySelectorAll('.filter-button');
+    const galleryGrid = document.querySelector('.gallery-grid');
+
+    // --- Lightbox Functions ---
+
     // Function to open the lightbox
     function openLightbox(index) {
-        currentImageIndex = index; // Set the current image index
-        updateLightboxImage(); // Load and display the image
+        // Ensure that we only open images from the currently visible items
+        const visibleItems = Array.from(galleryItems).filter(item => !item.classList.contains('hidden'));
+        currentImageIndex = visibleItems.indexOf(galleryItems[index]); // Get index within visible items
+
+        if (currentImageIndex === -1) return; // If clicked item is hidden, do nothing
+
+        updateLightboxImage(visibleItems); // Load and display the image from visible items
 
         // Add 'active' class to show the lightbox with a fade-in effect
         lightboxOverlay.classList.add('active');
@@ -33,33 +42,54 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Function to update the image and caption in the lightbox
-    function updateLightboxImage() {
-        // Ensure the index is within bounds
+    function updateLightboxImage(visibleItems = null) {
+        // Use visibleItems if provided (e.g., when opening lightbox or navigating filters)
+        // Otherwise, default to all galleryItems (e.g., for arrow navigation within lightbox)
+        const itemsToNavigate = visibleItems || Array.from(galleryItems).filter(item => !item.classList.contains('hidden'));
+
+        // Ensure the index is within bounds for the currently navigable items
         if (currentImageIndex < 0) {
-            currentImageIndex = galleryItems.length - 1; // Loop to last image if going before first
-        } else if (currentImageIndex >= galleryItems.length) {
-            currentImageIndex = 0; // Loop to first image if going after last
+            currentImageIndex = itemsToNavigate.length - 1; // Loop to last image
+        } else if (currentImageIndex >= itemsToNavigate.length) {
+            currentImageIndex = 0; // Loop to first image
         }
 
-        const currentItem = galleryItems[currentImageIndex];
+        const currentItem = itemsToNavigate[currentImageIndex];
         const fullSrc = currentItem.getAttribute('data-full-src');
         const caption = currentItem.getAttribute('data-caption');
 
-        // Show a loading indicator or handle broken image if fullSrc is invalid
         lightboxImage.src = fullSrc;
         lightboxImage.alt = caption; // Set alt text for accessibility
         lightboxCaption.textContent = caption;
     }
 
-    // Event Listeners for Gallery Items
+    // --- Gallery Filter Functions ---
+
+    // Function to filter images
+    function filterGallery(filterCategory) {
+        galleryItems.forEach(item => {
+            const itemCategory = item.getAttribute('data-category');
+            if (filterCategory === 'all' || itemCategory === filterCategory) {
+                item.classList.remove('hidden'); // Show item
+            } else {
+                item.classList.add('hidden'); // Hide item
+            }
+        });
+
+        // Optional: Scroll to top of gallery when a filter is applied
+        galleryGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // --- Event Listeners ---
+
+    // Lightbox Event Listeners
     galleryItems.forEach((item, index) => {
         item.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevent the default link behavior (navigating to #)
+            e.preventDefault(); // Prevent default link behavior
             openLightbox(index); // Open lightbox with the clicked image's index
         });
     });
 
-    // Event Listeners for Lightbox Controls
     lightboxClose.addEventListener('click', closeLightbox);
     lightboxPrev.addEventListener('click', () => {
         currentImageIndex--;
@@ -70,17 +100,14 @@ document.addEventListener('DOMContentLoaded', () => {
         updateLightboxImage();
     });
 
-    // Close lightbox when clicking outside the image container
     lightboxOverlay.addEventListener('click', (e) => {
-        // Check if the click occurred directly on the overlay, not on the container or its children
-        if (e.target === lightboxOverlay) {
+        if (e.target === lightboxOverlay) { // Only close if clicking on the overlay itself
             closeLightbox();
         }
     });
 
-    // Keyboard navigation (Escape key to close, arrow keys for prev/next)
     document.addEventListener('keydown', (e) => {
-        if (lightboxOverlay.classList.contains('active')) { // Only respond if lightbox is open
+        if (lightboxOverlay.classList.contains('active')) {
             if (e.key === 'Escape') {
                 closeLightbox();
             } else if (e.key === 'ArrowLeft') {
@@ -92,4 +119,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
+    // Gallery Filter Event Listeners
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove 'active' class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Add 'active' class to the clicked button
+            button.classList.add('active');
+
+            const filterCategory = button.getAttribute('data-filter');
+            filterGallery(filterCategory);
+        });
+    });
+
+    // Initial filter when the page loads (to show 'all' by default)
+    filterGallery('all');
 });
