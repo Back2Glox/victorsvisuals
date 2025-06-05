@@ -6,7 +6,7 @@
   <title>Gallery - Victor's Visuals</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="favicon.png" type="image/png" />
-  <!-- NEW: Font Awesome for social media icons (if you decide to use them later) and lightbox arrows -->
+  <!-- Font Awesome for social media icons and lightbox arrows -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -22,43 +22,49 @@
 
   <main>
     <h1>Gallery</h1>
-    <p>Explore by category:</p>
+    <p>Explore my work by category:</p>
+
+    <!-- NEW: Gallery Filter Buttons -->
+    <div class="gallery-filters">
+      <button class="button filter-button active" data-filter="all">All</button>
+      <button class="button filter-button" data-filter="space">Space</button>
+      <button class="button filter-button" data-filter="sky">Sky</button>
+      <button class="button filter-button" data-filter="animals">Animals</button>
+      <button class="button filter-button" data-filter="nature">Nature</button>
+      <!-- Add more category buttons as needed -->
+    </div>
 
     <div class="gallery-grid">
-      <!-- Each image is now wrapped in an <a> tag with data attributes for the lightbox -->
-      <!-- data-full-src: path to the full-size image for the lightbox -->
-      <!-- data-caption: text for the image caption -->
+      <!-- Each image now has a data-category attribute and loading="lazy" -->
 
-      <!-- Confirmed: space1.jpg is uploaded -->
-      <a href="#" class="gallery-item" data-full-src="space1.jpg" data-caption="A breathtaking view of the cosmos.">
-        <img src="space1.jpg" alt="Space - The Moon">
+      <a href="#" class="gallery-item" data-full-src="space1.jpg" data-caption="A breathtaking view of the moon." data-category="space">
+        <img src="space1.jpg" alt="Space - The Moon" loading="lazy">
       </a>
-      <!-- Placeholders for images not yet uploaded -->
-      <a href="#" class="gallery-item" data-full-src="sky1.jpg" data-caption="Vibrant hues painting the evening sky.">
-        <img src="https://placehold.co/600x400/1a1a1a/fce4ec?text=Sky" alt="Sky">
+      <a href="#" class="gallery-item" data-full-src="sky1.jpg" data-caption="Vibrant hues painting the evening sky." data-category="sky">
+        <img src="https://placehold.co/600x400/1a1a1a/fce4ec?text=Sky" alt="Sky" loading="lazy">
       </a>
-      <a href="#" class="gallery-item" data-full-src="animals1.jpg" data-caption="A majestic creature in its natural habitat.">
-        <img src="https://placehold.co/600x400/1a1a1a/fce4ec?text=Animals" alt="Animals">
+      <a href="#" class="gallery-item" data-full-src="animals1.jpg" data-caption="A majestic creature in its natural habitat." data-category="animals">
+        <img src="https://placehold.co/600x400/1a1a1a/fce4ec?text=Animals" alt="Animals" loading="lazy">
       </a>
-      <a href="#" class="gallery-item" data-full-src="nature1.jpg" data-caption="Serene landscapes, untouched beauty.">
-        <img src="https://placehold.co/600x400/1a1a1a/fce4ec?text=Nature" alt="Nature">
+      <a href="#" class="gallery-item" data-full-src="nature1.jpg" data-caption="Serene landscapes, untouched beauty." data-category="nature">
+        <img src="https://placehold.co/600x400/1a1a1a/fce4ec?text=Nature" alt="Nature" loading="lazy">
       </a>
-      <a href="#" class="gallery-item" data-full-src="space2.jpg" data-caption="Distant galaxies swirling in the dark.">
-        <img src="https://placehold.co/600x400/1a1a1a/fce4ec?text=Space+2" alt="Space 2">
+      <a href="#" class="gallery-item" data-full-src="space2.jpg" data-caption="Distant galaxies swirling in the dark." data-category="space">
+        <img src="https://placehold.co/600x400/1a1a1a/fce4ec?text=Space+2" alt="Space 2" loading="lazy">
       </a>
-      <a href="#" class="gallery-item" data-full-src="sky2.jpg" data-caption="Clouds dancing across a clear blue sky.">
-        <img src="https://placehold.co/600x400/1a1a1a/fce4ec?text=Sky+2" alt="Sky 2">
+      <a href="#" class="gallery-item" data-full-src="sky2.jpg" data-caption="Clouds dancing across a clear blue sky." data-category="sky">
+        <img src="https://placehold.co/600x400/1a1a1a/fce4ec?text=Sky+2" alt="Sky 2" loading="lazy">
       </a>
-      <a href="#" class="gallery-item" data-full-src="animals2.jpg" data-caption="A curious gaze from the wild.">
-        <img src="https://placehold.co/600x400/1a1a1a/fce4ec?text=Animals+2" alt="Animals 2">
+      <a href="#" class="gallery-item" data-full-src="animals2.jpg" data-caption="A curious gaze from the wild." data-category="animals">
+        <img src="https://placehold.co/600x400/1a1a1a/fce4ec?text=Animals+2" alt="Animals 2" loading="lazy">
       </a>
-      <a href="#" class="gallery-item" data-full-src="nature2.jpg" data-caption="Lush greenery and tranquil waters.">
-        <img src="https://placehold.co/600x400/1a1a1a/fce4ec?text=Nature+2" alt="Nature 2">
+      <a href="#" class="gallery-item" data-full-src="nature2.jpg" data-caption="Lush greenery and tranquil waters." data-category="nature">
+        <img src="https://placehold.co/600x400/1a1a1a/fce4ec?text=Nature+2" alt="Nature 2" loading="lazy">
       </a>
     </div>
   </main>
 
-  <!-- NEW: Lightbox Modal Structure -->
+  <!-- Lightbox Modal Structure -->
   <div id="lightbox-overlay">
     <div id="lightbox-container">
       <button id="lightbox-close" aria-label="Close Lightbox"><i class="fas fa-times"></i></button>
@@ -73,7 +79,7 @@
     <p>© 2025 Victor Townsend</p>
   </footer>
 
-  <!-- NEW: Link to your JavaScript file -->
+  <!-- Link to JavaScript file -->
   <script src="script.js"></script>
 </body>
 </html>
