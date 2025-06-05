@@ -787,7 +787,7 @@ footer {
   position: relative;
   width: 100%;
   /* Maintain aspect ratio. If your images are 3:2 (e.g., 600x400), this is 66.66%. Adjust if different. */
-  padding-top: 66.66%; 
+  padding-top: 66.66%;
   overflow: hidden; /* This is crucial for clipping the 'before' image */
   border-radius: 8px;
   margin: 25px auto;
@@ -804,13 +804,15 @@ footer {
   height: 100%;
   object-fit: cover; /* Ensures images cover the area without distortion */
   display: block;
+  /* IMPORTANT for alignment: ensure both images start at the same relative position */
+  object-position: left; /* This pins the images to the left edge within their object-fit */
 }
 
 /* The 'before' image is the one that gets clipped by its own width */
 .comparison-image-before {
   /* Its width will be controlled by JavaScript for the sliding effect */
   /* Ensure it's above the 'after' image */
-  z-index: 2; 
+  z-index: 2;
 }
 
 .comparison-handle {
