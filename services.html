@@ -54,12 +54,12 @@
             <li><i class="fas fa-check-circle"></i> Step-by-step guidance on how to save and use presets</li>
             <li><i class="fas fa-check-circle"></i> Ideal for diverse photography needs</li>
           </ul>
-          <!-- UPDATED: Before/After Image Comparison Slider structure for better alignment -->
+          <!-- UPDATED: Before/After Image Comparison Slider structure for robust alignment -->
           <div class="image-comparison-container" id="nightchrome-comparison">
-            <!-- The base image is the 'AFTER' image -->
-            <img class="comparison-image-after" src="nightchrome_after.jpg" alt="Nightchrome Preset After" loading="lazy" onerror="this.src='https://placehold.co/600x400/1a1a1a/fce4ec?text=AFTER'">
-            <!-- The overlay image is the 'BEFORE' image -->
-            <img class="comparison-image-before" src="nightchrome_before.jpg" alt="Nightchrome Preset Before" loading="lazy" onerror="this.src='https://placehold.co/600x400/1a1a1a/fce4ec?text=BEFORE'">
+            <!-- The base image (AFTER) should always be visible -->
+            <img class="comparison-image-after" src="nightchrome_after.jpg" alt="Nightchrome Preset After" loading="lazy" onerror="this.src='https://placehold.co/600x400/1a1a1a/fce4ec?text=AFTER IMAGE MISSING'">
+            <!-- The top image (BEFORE) will be clipped by JavaScript -->
+            <img class="comparison-image-before" src="nightchrome_before.jpg" alt="Nightchrome Preset Before" loading="lazy" onerror="this.src='https://placehold.co/600x400/1a1a1a/fce4ec?text=BEFORE IMAGE MISSING'">
             <div class="comparison-handle"></div>
             <span class="comparison-label before">BEFORE</span>
             <span class="comparison-label after">AFTER</span>
