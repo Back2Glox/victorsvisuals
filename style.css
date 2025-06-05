@@ -1,4 +1,4 @@
-/* style.css - Complete and Updated Version with Fixed Slider Alignment and Responsiveness */
+/* style.css - Complete and Updated Version with img-comparison-slider Styles */
 
 /* Google Fonts Import: Poppins with various weights */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
@@ -782,103 +782,53 @@ footer {
   line-height: 1.7;
 }
 
-/* UPDATED: Image Comparison Slider Styles for two separate images */
-.image-comparison-container {
-  position: relative;
+/* NEW: Styles for the img-comparison-slider */
+.slider-wrapper {
+  margin: 25px auto; /* Centering and spacing */
   width: 100%;
-  /* Maintain aspect ratio. If your images are 3:2 (e.g., 600x400), this is 66.66%. Adjust if different. */
-  padding-top: 66.66%;
-  overflow: hidden; /* This is crucial for clipping the 'before' image */
+  /* Ensures aspect ratio is maintained by the slider itself */
+  /* If your images are 3:2 (e.g., 600x400), set max-height or min-height */
+  /* For responsiveness, the slider will adapt to its parent container */
+}
+
+.custom-image-comparison-slider {
+  width: 100%;
+  height: auto; /* Allow height to adjust based on aspect ratio */
+  display: block; /* Important for full width */
   border-radius: 8px;
-  margin: 25px auto;
-  cursor: ew-resize;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  /* Override default slider styles if needed */
+  --divider-width: 4px; /* Thickness of the handle bar */
+  --divider-color: var(--foreground); /* Color of the handle bar */
+  --handle-radius: 50%; /* Make the handle round */
+  --handle-size: 40px; /* Size of the draggable handle */
+  --handle-color: var(--foreground); /* Color of the handle circle */
+  --handle-shadow: 0 2px 5px rgba(0, 0, 0, 0.4); /* Shadow for the handle */
+  --default-label-font: "Poppins", sans-serif; /* Font for labels */
+  --default-label-background: rgba(0, 0, 0, 0.6); /* Background for labels */
+  --default-label-color: var(--text); /* Text color for labels */
+  --default-label-padding: 5px 10px; /* Padding for labels */
+  --default-label-border-radius: 5px; /* Border radius for labels */
+  --default-label-font-size: 0.9em; /* Font size for labels */
+  --default-label-font-weight: 500; /* Font weight for labels */
 }
 
-.comparison-image-after,
-.comparison-image-before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%; /* Both images take up 100% of the container's width */
-  height: 100%;
-  object-fit: cover; /* Ensures images cover the area without distortion */
-  display: block;
-  /* IMPORTANT for alignment: ensure both images start at the same relative position */
-  object-position: left; /* This pins the images to the left edge within their object-fit */
+.custom-image-comparison-slider img {
+  object-fit: cover; /* Ensures images cover the area within the slider */
 }
 
-/* The 'before' image is the one that gets clipped by its own width */
-.comparison-image-before {
-  /* Its width will be controlled by JavaScript for the sliding effect */
-  /* Ensure it's above the 'after' image */
-  z-index: 2;
+/* Customize the "BEFORE" and "AFTER" labels if you need more control than the default vars */
+/* The library creates slots for these, but direct styling might be needed if defaults aren't enough */
+.custom-image-comparison-slider > :first-child[slot="before"] + * + div {
+  /* This is the handle, and its pseudo-elements are the labels */
+  /* This is a complex selector to target the labels inside the custom element,
+     it might be easier to use the library's CSS variables if possible.
+     For this specific library, the labels are part of the Shadow DOM,
+     and best styled via CSS variables like --default-label-background etc. as above.
+     The HTML span tags are placeholders and won't be directly rendered by the library.
+  */
 }
 
-.comparison-handle {
-  position: absolute;
-  top: 0;
-  left: 50%; /* Start in the middle */
-  width: 4px; /* Handle bar thickness */
-  height: 100%;
-  background-color: var(--foreground);
-  transform: translateX(-50%); /* Center the handle on its 'left' position */
-  cursor: ew-resize;
-  z-index: 10; /* Ensure handle is above both images */
-  border-radius: 2px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.comparison-handle::before,
-.comparison-handle::after {
-  content: '';
-  position: absolute;
-  width: 20px; /* Width of the little draggable circles */
-  height: 20px;
-  background-color: var(--foreground);
-  border-radius: 50%;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 11; /* Ensure circles are above the handle bar */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-  transition: background-color 0.2s ease;
-}
-
-.comparison-handle::before {
-  left: -10px;
-}
-
-.comparison-handle::after {
-  right: -10px;
-}
-
-.comparison-handle:hover::before,
-.comparison-handle:hover::after {
-  background-color: var(--accent);
-}
-
-.comparison-label {
-  position: absolute;
-  top: 15px;
-  padding: 5px 10px;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: var(--text);
-  font-size: 0.9em;
-  font-weight: 500;
-  border-radius: 5px;
-  z-index: 2; /* Labels above images but below handle */
-  text-transform: uppercase;
-}
-
-.comparison-label.before {
-  left: 15px;
-}
-
-.comparison-label.after {
-  right: 15px;
-}
 
 .comparison-caption {
   font-size: 0.9em;
@@ -962,14 +912,8 @@ footer {
     right: 10px;
   }
   /* Image comparison adjustments for tablets */
-  .image-comparison-container {
-    width: 90%;
-    padding-top: 60%;
-  }
-  .comparison-label {
-    font-size: 0.8em;
-    top: 10px;
-    padding: 3px 6px;
+  .custom-image-comparison-slider {
+    /* The library handles responsiveness internally quite well */
   }
 }
 
@@ -1075,16 +1019,6 @@ footer {
   }
   .workflow-info h3 {
     font-size: 1.3em;
-  }
-  /* Image comparison adjustments for mobile */
-  .image-comparison-container {
-    width: 100%;
-    margin: 20px auto;
-  }
-  .comparison-label {
-    font-size: 0.7em;
-    top: 8px;
-    padding: 3px 6px;
   }
 }
 
