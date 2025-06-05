@@ -1,4 +1,4 @@
-/* style.css - Enhanced Version with Services Page Styles */
+/* style.css - Enhanced Version with Badge Fix */
 
 /* Google Fonts Import: Poppins with various weights */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
@@ -644,6 +644,142 @@ footer {
 }
 
 
+/* NEW/MODIFIED: Services Page Styles with Badge Fix */
+.services-section {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.services-intro {
+  font-size: 1.1em;
+  margin-bottom: 40px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.8;
+}
+
+.service-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px; /* Slightly reduced gap for cards */
+  justify-content: center;
+  align-items: stretch; /* Make cards stretch to same height */
+  margin-top: 40px;
+}
+
+.service-card {
+  background-color: var(--dark-gray);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px var(--shadow-dark);
+  flex: 1;
+  min-width: 280px; /* Adjusted min-width for cards */
+  max-width: 45%; /* Max width to allow two cards per row on larger screens */
+  text-align: center;
+  display: flex; /* Use flexbox for vertical alignment within card */
+  flex-direction: column;
+  justify-content: space-between; /* Push button to bottom */
+  position: relative; /* IMPORTANT: Establish positioning context for the badge */
+}
+
+.service-card h2 {
+  color: var(--foreground);
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.6em; /* Slightly larger heading */
+  letter-spacing: 0.03em;
+}
+
+.service-card .price {
+  font-size: 2.8em; /* Larger price text */
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.service-card .per-item {
+  font-size: 0.7em;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.service-card .save-info {
+  font-size: 0.9em;
+  color: var(--text);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.service-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  text-align: left; /* Align list items left */
+}
+
+.service-card ul li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 0.95em;
+}
+
+.service-card ul li i {
+  color: var(--accent);
+  margin-right: 8px;
+  font-size: 1.1em;
+}
+
+.service-card .button {
+  margin-top: auto; /* Push button to the bottom */
+  width: 100%;
+}
+
+.service-card.highlight {
+  border: 2px solid var(--accent); /* Stronger border for highlight card */
+  box-shadow: 0 0 25px var(--shadow-light); /* More prominent glow for highlight */
+  background-color: #242424; /* Slightly different background for highlight */
+}
+
+.badge {
+  position: absolute; /* Changed to absolute positioning */
+  top: -15px; /* Adjust as needed to position above the card */
+  right: 15px; /* Position from the right edge */
+  background-color: var(--accent);
+  color: var(--background);
+  padding: 5px 12px;
+  border-radius: 15px; /* More rounded */
+  font-size: 0.8em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 5; /* Ensure it's above the card content */
+  transform: rotate(5deg); /* Slight rotation for a "badge" effect */
+}
+
+.workflow-info {
+  max-width: 700px;
+  margin: 60px auto 30px auto; /* More spacing */
+  padding: 0 20px;
+  text-align: center;
+}
+
+.workflow-info h3 {
+  color: var(--foreground);
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  letter-spacing: 0.05em;
+}
+
+.workflow-info p {
+  font-size: 1.05em;
+  line-height: 1.7;
+}
+
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   header {
@@ -656,7 +792,7 @@ footer {
     margin-left: 20px;
   }
   .hero-section {
-    height: 60vh; /* Slightly smaller hero on tablets */
+    height: 60vh;
     margin-bottom: 40px;
   }
   .hero-title {
@@ -671,11 +807,11 @@ footer {
   .latest-work-section,
   .about-content,
   .contact-section,
-  .services-section { /* Added services-section */
+  .services-section {
     margin: 40px auto;
   }
   .gallery-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Smaller min column for gallery */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
   }
   .highlight-imgs {
@@ -696,22 +832,26 @@ footer {
   }
   /* Contact form adjustments for tablets */
   .contact-container {
-    flex-direction: column; /* Stack columns on tablets */
+    flex-direction: column;
     align-items: center;
   }
   .contact-form-wrapper,
   .contact-details-wrapper {
-    width: 90%; /* Take more width when stacked */
-    min-width: unset; /* Remove min-width constraint */
+    width: 90%;
+    min-width: unset;
   }
   /* Services page adjustments for tablets */
   .service-card-container {
-    flex-direction: column;
+    flex-direction: column; /* Stack cards on tablets */
     align-items: center;
   }
   .service-card {
     width: 90%;
     max-width: 400px; /* Limit width of stacked cards */
+  }
+  .badge {
+    top: -10px; /* Adjust badge position for smaller screens */
+    right: 10px;
   }
 }
 
@@ -728,10 +868,10 @@ footer {
     align-items: flex-start;
   }
   nav a {
-    margin: 8px 0; /* Stack nav links vertically */
+    margin: 8px 0;
   }
   .hero-section {
-    height: 50vh; /* Even smaller hero on mobile */
+    height: 50vh;
     margin-bottom: 30px;
   }
   .hero-overlay {
@@ -755,7 +895,7 @@ footer {
     gap: 15px;
   }
   .profile-picture {
-    width: min(150px, 60vw); /* Smaller profile picture on mobile */
+    width: min(150px, 60vw);
   }
   footer {
     margin-top: 40px;
@@ -786,7 +926,7 @@ footer {
   /* Contact form adjustments for mobile */
   .contact-form-wrapper,
   .contact-details-wrapper {
-    width: 100%; /* Full width on mobile */
+    width: 100%;
     padding: 20px;
   }
   .contact-intro {
@@ -829,6 +969,6 @@ footer {
     font-size: 0.9em;
   }
   .gallery-grid {
-    grid-template-columns: 1fr; /* Single column on very small screens */
+    grid-template-columns: 1fr;
   }
 }
