@@ -1,6 +1,9 @@
-// script.js - Handles the interactive gallery (lightbox), category filtering, and image comparison slider functionality
+// script.js - Handles the interactive gallery (lightbox), category filtering.
+// Image comparison slider functionality is now handled by img-comparison-slider library.
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("Script loaded and DOM content loaded.");
+
     // --- Lightbox Elements ---
     const galleryItems = document.querySelectorAll('.gallery-item');
     const lightboxOverlay = document.getElementById('lightbox-overlay');
@@ -16,19 +19,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterButtons = document.querySelectorAll('.filter-button');
     const galleryGrid = document.querySelector('.gallery-grid');
 
-    // --- Image Comparison Slider Elements ---
-    const comparisonContainer = document.getElementById('nightchrome-comparison');
-    let imageBefore, comparisonHandle; // Will be set if container exists
-
     // --- Lightbox Functions ---
 
     // Function to open the lightbox
     function openLightbox(index) {
+        console.log("Opening lightbox for index:", index);
         // Ensure that we only open images from the currently visible items
         const visibleItems = Array.from(galleryItems).filter(item => !item.classList.contains('hidden'));
         currentImageIndex = visibleItems.indexOf(galleryItems[index]); // Get index within visible items
 
-        if (currentImageIndex === -1) return; // If clicked item is hidden, do nothing
+        if (currentImageIndex === -1) {
+            console.warn("Attempted to open a hidden gallery item.");
+            return; // If clicked item is hidden, do nothing
+        }
 
         updateLightboxImage(visibleItems); // Load and display the image from visible items
 
@@ -40,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to close the lightbox
     function closeLightbox() {
+        console.log("Closing lightbox.");
         lightboxOverlay.classList.remove('active'); // Remove 'active' class to hide lightbox
         // Allow body scrolling again
         document.body.style.overflow = '';
@@ -47,8 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to update the image and caption in the lightbox
     function updateLightboxImage(visibleItems = null) {
-        // Use visibleItems if provided (e.g., when opening lightbox or navigating filters)
-        // Otherwise, default to all galleryItems (e.g., for arrow navigation within lightbox)
         const itemsToNavigate = visibleItems || Array.from(galleryItems).filter(item => !item.classList.contains('hidden'));
 
         // Ensure the index is within bounds for the currently navigable items
@@ -65,12 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
         lightboxImage.src = fullSrc;
         lightboxImage.alt = caption; // Set alt text for accessibility
         lightboxCaption.textContent = caption;
+        console.log("Lightbox image updated to:", fullSrc);
     }
 
     // --- Gallery Filter Functions ---
 
     // Function to filter images
     function filterGallery(filterCategory) {
+        console.log("Filtering gallery by:", filterCategory);
         galleryItems.forEach(item => {
             const itemCategory = item.getAttribute('data-category');
             if (filterCategory === 'all' || itemCategory === filterCategory) {
@@ -81,89 +85,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Optional: Scroll to top of gallery when a filter is applied
-        galleryGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    // --- Image Comparison Slider Functions ---
-
-    // Function to initialize the slider
-    function initializeImageComparison(container) {
-        if (!container) return; // Exit if container doesn't exist
-
-        imageBefore = container.querySelector('.comparison-image-before'); // Select the 'before' image directly
-        comparisonHandle = container.querySelector('.comparison-handle');
-
-        let isDragging = false;
-
-        // Function to update the slider position based on mouse/touch X coordinate
-        function slide(clientX) {
-            const containerRect = container.getBoundingClientRect();
-            let x = clientX - containerRect.left; // X position relative to container
-
-            // Clamp x to be within container bounds (from 0 to container width)
-            if (x < 0) x = 0;
-            if (x > containerRect.width) x = containerRect.width;
-
-            const percentage = (x / containerRect.width) * 100;
-
-            // Control the width of the 'before' image to reveal/hide it
-            imageBefore.style.width = `${percentage}%`;
-            // Move the handle with the edge of the 'before' image
-            comparisonHandle.style.left = `${percentage}%`;
+        // Check if galleryGrid exists before attempting to scrollIntoView
+        if (galleryGrid) {
+            galleryGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-
-        // Mouse events for desktop
-        comparisonHandle.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            container.classList.add('dragging'); // Add class to prevent text selection during drag
-        });
-
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-            container.classList.remove('dragging');
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            if (isDragging) {
-                slide(e.clientX);
-            }
-        });
-
-        // Touch events for mobile
-        comparisonHandle.addEventListener('touchstart', (e) => {
-            isDragging = true;
-            container.classList.add('dragging');
-            e.preventDefault(); // Prevent scrolling on touch devices
-        }, { passive: false }); // Use passive: false to allow preventDefault
-
-        document.addEventListener('touchend', () => {
-            isDragging = false;
-            container.classList.remove('dragging');
-        });
-
-        document.addEventListener('touchmove', (e) => {
-            if (isDragging && e.touches.length > 0) {
-                slide(e.touches[0].clientX);
-                e.preventDefault(); // Prevent scrolling
-            }
-        }, { passive: false });
-        
-        // Initial positioning: Set slider to the middle initially
-        // Use a small delay to ensure images have loaded and dimensions are correct
-        setTimeout(() => {
-            const initialX = container.getBoundingClientRect().left + container.getBoundingClientRect().width / 2;
-            slide(initialX); 
-        }, 100); // 100ms delay
-
-        // Add a resize listener to re-initialize slider position on window resize
-        // This is crucial for responsiveness on different screen sizes and orientation changes
-        window.addEventListener('resize', () => {
-            // Get the current position of the handle relative to the container
-            const handleCurrentLeft = comparisonHandle.getBoundingClientRect().left - container.getBoundingClientRect().left;
-            slide(handleCurrentLeft); // Re-adjust based on current handle position
-        });
     }
-
 
     // --- Event Listeners ---
 
@@ -221,8 +147,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial filter when the page loads (to show 'all' by default)
     filterGallery('all');
 
-    // Initialize image comparison slider if it exists on the page
-    if (comparisonContainer) {
-        initializeImageComparison(comparisonContainer);
-    }
+    // No need for custom image comparison initialization. The library handles itself.
+    console.log("Image comparison slider initialized by library (if present).");
 });
