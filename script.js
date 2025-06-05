@@ -111,9 +111,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // The handle's left position moves with the overlay's edge
             comparisonHandle.style.left = `${percentage}%`;
             
-            // The image inside the overlay should stay fixed at 0% relative to its container (the overlay)
-            // It will be clipped by the overlay's changing width.
-            // No need to adjust its 'left' property dynamically.
+            // The image inside the overlay needs to be translated to perfectly align
+            // with the background image as the overlay width changes.
+            // This makes sure the 'before' image content stays in place,
+            // and only the clipping mask (overlay) changes.
+            comparisonOverlay.querySelector('.comparison-image').style.transform = `translateX(-${100 - percentage}%)`;
         }
 
         // Mouse events for desktop
