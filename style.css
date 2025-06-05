@@ -1,4 +1,4 @@
-/* style.css - Enhanced Version with Gallery Filter Styles */
+/* style.css - Enhanced Version with Services Page Styles */
 
 /* Google Fonts Import: Poppins with various weights */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
@@ -670,7 +670,8 @@ footer {
   }
   .latest-work-section,
   .about-content,
-  .contact-section { /* Added contact-section */
+  .contact-section,
+  .services-section { /* Added services-section */
     margin: 40px auto;
   }
   .gallery-grid {
@@ -702,6 +703,15 @@ footer {
   .contact-details-wrapper {
     width: 90%; /* Take more width when stacked */
     min-width: unset; /* Remove min-width constraint */
+  }
+  /* Services page adjustments for tablets */
+  .service-card-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .service-card {
+    width: 90%;
+    max-width: 400px; /* Limit width of stacked cards */
   }
 }
 
@@ -782,6 +792,32 @@ footer {
   .contact-intro {
     font-size: 1em;
     margin-bottom: 20px;
+  }
+  /* Services page adjustments for mobile */
+  .services-intro {
+    font-size: 0.95em;
+    margin-bottom: 25px;
+  }
+  .service-card {
+    padding: 20px;
+  }
+  .service-card h2 {
+    font-size: 1.4em;
+  }
+  .service-card .price {
+    font-size: 2em;
+  }
+  .service-card .per-item {
+    font-size: 0.6em;
+  }
+  .service-card .save-info {
+    font-size: 0.9em;
+  }
+  .workflow-info {
+    padding: 0 15px;
+  }
+  .workflow-info h3 {
+    font-size: 1.3em;
   }
 }
 
