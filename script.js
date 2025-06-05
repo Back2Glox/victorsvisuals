@@ -1,4 +1,4 @@
-// script.js - Handles the interactive gallery (lightbox) and category filtering functionality
+// script.js - Handles the interactive gallery (lightbox), category filtering, and image comparison slider functionality
 
 document.addEventListener('DOMContentLoaded', () => {
     // --- Lightbox Elements ---
@@ -15,6 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Gallery Filter Elements ---
     const filterButtons = document.querySelectorAll('.filter-button');
     const galleryGrid = document.querySelector('.gallery-grid');
+
+    // --- Image Comparison Slider Elements ---
+    const comparisonContainer = document.getElementById('nightchrome-comparison');
+    let comparisonOverlay, comparisonHandle; // Will be set if container exists
 
     // --- Lightbox Functions ---
 
@@ -80,6 +84,80 @@ document.addEventListener('DOMContentLoaded', () => {
         galleryGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
+    // --- Image Comparison Slider Functions ---
+
+    // Function to initialize the slider
+    function initializeImageComparison(container) {
+        if (!container) return; // Exit if container doesn't exist
+
+        comparisonOverlay = container.querySelector('.comparison-overlay');
+        comparisonHandle = container.querySelector('.comparison-handle');
+
+        let isDragging = false;
+
+        // Function to update the slider position
+        function slide(clientX) {
+            const containerRect = container.getBoundingClientRect();
+            let x = clientX - containerRect.left; // X position relative to container
+
+            // Clamp x to be within container bounds
+            if (x < 0) x = 0;
+            if (x > containerRect.width) x = containerRect.width;
+
+            const percentage = (x / containerRect.width) * 100;
+
+            // The overlay's width determines how much of the 'before' image is visible
+            comparisonOverlay.style.width = `${percentage}%`;
+            // The handle's left position moves with the overlay's edge
+            comparisonHandle.style.left = `${percentage}%`;
+            
+            // The image inside the overlay should stay fixed at 0% relative to its container (the overlay)
+            // It will be clipped by the overlay's changing width.
+            // No need to adjust its 'left' property dynamically.
+        }
+
+        // Mouse events for desktop
+        comparisonHandle.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            container.classList.add('dragging'); // Add class to prevent text selection during drag
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            container.classList.remove('dragging');
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                slide(e.clientX);
+            }
+        });
+
+        // Touch events for mobile
+        comparisonHandle.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            container.classList.add('dragging');
+            e.preventDefault(); // Prevent scrolling on touch devices
+        }, { passive: false }); // Use passive: false to allow preventDefault
+
+        document.addEventListener('touchend', () => {
+            isDragging = false;
+            container.classList.remove('dragging');
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (isDragging && e.touches.length > 0) {
+                slide(e.touches[0].clientX);
+                e.preventDefault(); // Prevent scrolling
+            }
+        }, { passive: false });
+        
+        // Initial positioning: Set slider to the middle initially
+        const initialX = container.getBoundingClientRect().left + container.getBoundingClientRect().width / 2;
+        slide(initialX); 
+    }
+
+
     // --- Event Listeners ---
 
     // Lightbox Event Listeners
@@ -135,4 +213,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial filter when the page loads (to show 'all' by default)
     filterGallery('all');
+
+    // Initialize image comparison slider if it exists on the page
+    if (comparisonContainer) {
+        initializeImageComparison(comparisonContainer);
+    }
 });
