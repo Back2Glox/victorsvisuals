@@ -1,4 +1,4 @@
-/* style.css - Enhanced Version with Badge Fix */
+/* style.css - Complete and Updated Version with All Styles */
 
 /* Google Fonts Import: Poppins with various weights */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
@@ -21,12 +21,12 @@ body {
   background-color: var(--background);
   color: var(--text);
   line-height: 1.6;
-  padding: 0; /* Removed body padding to allow full-width sections */
+  padding: 0;
   font-family: "Poppins", sans-serif;
-  font-weight: 300; /* Lighter default font-weight for body text */
-  margin: 0; /* Ensure no default body margin */
-  overflow-x: hidden; /* Prevent horizontal scrollbar from overflow */
-  scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+  font-weight: 300;
+  margin: 0;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 /* Custom Scrollbar Styling (Webkit browsers like Chrome, Safari) */
@@ -51,13 +51,13 @@ body {
 a {
   color: var(--accent);
   text-decoration: none;
-  transition: color 0.3s ease, transform 0.3s ease; /* Added transform transition */
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 a:hover {
-  text-decoration: none; /* Removed default underline on hover for cleaner look */
-  color: var(--foreground); /* Change to foreground color on hover */
-  transform: translateY(-1px); /* Subtle lift effect */
+  text-decoration: none;
+  color: var(--foreground);
+  transform: translateY(-1px);
 }
 
 /* Focus States for Accessibility */
@@ -65,9 +65,9 @@ a:focus,
 button:focus,
 input:focus,
 textarea:focus {
-  outline: 2px solid var(--accent); /* Highlight focused elements */
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
-  border-radius: 4px; /* Match element's rounded corners */
+  border-radius: 4px;
 }
 
 /* Header Section */
@@ -75,28 +75,28 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 40px; /* Increased horizontal padding */
+  padding: 20px 40px;
   background-color: var(--dark-gray);
   border-bottom: 1px solid var(--medium-gray);
   position: relative;
-  z-index: 10; /* Ensure header stays on top of other content */
-  box-shadow: 0 2px 10px var(--shadow-dark); /* Subtle shadow for depth */
+  z-index: 10;
+  box-shadow: 0 2px 10px var(--shadow-dark);
 }
 
 .logo {
   font-weight: 600;
-  font-size: 28px; /* Slightly larger logo */
+  font-size: 28px;
   color: var(--accent);
   cursor: pointer;
-  letter-spacing: 0.05em; /* Add some letter spacing */
+  letter-spacing: 0.05em;
 }
 
 /* Navigation Links */
 nav a {
-  margin-left: 30px; /* Increased spacing between nav links */
+  margin-left: 30px;
   color: var(--text);
-  font-weight: 400; /* Slightly bolder for better readability */
-  position: relative; /* For underline animation */
+  font-weight: 400;
+  position: relative;
 }
 
 nav a::after {
@@ -107,7 +107,7 @@ nav a::after {
   bottom: -5px;
   left: 0;
   background-color: var(--accent);
-  transition: width 0.3s ease-out; /* Underline animation */
+  transition: width 0.3s ease-out;
 }
 
 nav a:hover::after {
@@ -116,22 +116,22 @@ nav a:hover::after {
 
 /* Main Content Area */
 main {
-  padding: 0; /* Main padding removed to allow hero to be full width */
+  padding: 0;
   margin: 0;
 }
 
-/* Hero Section Styles */
+/* Hero Section Styles (Used on index.html) */
 .hero-section {
   position: relative;
   width: 100%;
-  height: 70vh; /* Increased height for more impact */
+  height: 70vh;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--text);
   text-align: center;
-  margin-bottom: 60px; /* More space below the hero section */
+  margin-bottom: 60px;
 }
 
 .hero-image {
@@ -142,105 +142,105 @@ main {
   top: 0;
   left: 0;
   z-index: 1;
-  filter: brightness(0.7); /* Slightly darken image for text readability */
+  filter: brightness(0.7);
 }
 
 .hero-overlay {
   position: relative;
   z-index: 2;
-  background-color: rgba(0, 0, 0, 0.5); /* Slightly darker overlay */
-  padding: 50px 30px; /* Increased padding */
-  border-radius: 12px; /* Slightly more rounded corners */
-  max-width: 900px; /* Increased max-width */
-  box-shadow: 0 8px 25px var(--shadow-dark); /* More pronounced shadow */
-  animation: fadeInScale 1s ease-out; /* Animation on load */
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 50px 30px;
+  border-radius: 12px;
+  max-width: 900px;
+  box-shadow: 0 8px 25px var(--shadow-dark);
+  animation: fadeInScale 1s ease-out;
 }
 
 .hero-title {
-  font-size: clamp(2.5em, 6vw, 4.5em); /* Larger responsive font size */
+  font-size: clamp(2.5em, 6vw, 4.5em);
   margin-bottom: 15px;
   color: var(--foreground);
-  letter-spacing: 0.1em; /* More letter spacing for hero title */
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Text shadow for pop */
+  letter-spacing: 0.1em;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
 
 .hero-subtitle {
-  font-size: clamp(1.1em, 2.8vw, 1.8em); /* Larger responsive font size */
+  font-size: clamp(1.1em, 2.8vw, 1.8em);
   margin-bottom: 40px;
   color: var(--text);
   font-weight: 300;
-  max-width: 600px; /* Constrain subtitle width */
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .hero-button {
-  font-size: 1.2em; /* Larger button text */
-  padding: 15px 30px; /* Larger button padding */
+  font-size: 1.2em;
+  padding: 15px 30px;
 }
 
-/* Latest Work Section */
+/* Latest Work Section (Used on index.html) */
 .latest-work-section {
     max-width: 1000px;
-    margin: 60px auto; /* Increased top margin */
+    margin: 60px auto;
     padding: 0 20px;
     text-align: center;
 }
 
 .latest-work-section h2 {
-    margin-bottom: 40px; /* More space below heading */
+    margin-bottom: 40px;
 }
 
-/* About Page Content */
+/* About Page Content (Used on about.html) */
 .about-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 25px; /* Increased gap */
+  gap: 25px;
   max-width: 1000px;
-  margin: 60px auto; /* Increased top margin */
+  margin: 60px auto;
   padding: 0 20px;
 }
 
 .about-content h2 {
   margin-top: 30px;
   margin-bottom: 15px;
-  letter-spacing: 0.06em; /* Slightly more spacing for subheadings */
+  letter-spacing: 0.06em;
 }
 
 .about-content p {
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
-  font-weight: 300; /* Ensure consistent body text weight */
+  font-weight: 300;
 }
 
 .profile-picture {
-  width: min(200px, 70vw); /* Slightly larger max size, more responsive */
+  width: min(200px, 70vw);
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid var(--accent); /* Thicker accent border */
-  box-shadow: 0 0 20px var(--shadow-light); /* More pronounced glow */
+  border: 4px solid var(--accent);
+  box-shadow: 0 0 20px var(--shadow-light);
   margin-bottom: 25px;
-  transition: transform 0.3s ease; /* Added transition for hover effect */
+  transition: transform 0.3s ease;
 }
 
 .profile-picture:hover {
-  transform: scale(1.05); /* Subtle zoom on hover */
+  transform: scale(1.05);
 }
 
-/* Gallery Filter Buttons */
+/* Gallery Filter Buttons (Used on gallery.html) */
 .gallery-filters {
   text-align: center;
-  margin: 40px auto 30px auto; /* Centered with spacing */
+  margin: 40px auto 30px auto;
   max-width: 1000px;
   padding: 0 20px;
   display: flex;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 15px; /* Space between buttons */
+  gap: 15px;
 }
 
 .filter-button {
@@ -263,95 +263,95 @@ main {
 
 .filter-button.active {
   background-color: var(--accent);
-  color: var(--background); /* Dark text on active accent button */
+  color: var(--background);
   border-color: var(--accent);
   font-weight: 600;
   box-shadow: 0 4px 10px var(--shadow-light);
 }
 
-/* Gallery Grid */
+/* Gallery Grid (Used on gallery.html) */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly larger min column width */
-  gap: 25px; /* Increased gap */
-  max-width: 1200px; /* Max width for the gallery grid */
-  margin: 40px auto; /* Center the grid */
-  padding: 0 20px; /* Add padding */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
 .gallery-grid .gallery-item {
-  display: block; /* Make the link a block to contain the image */
+  display: block;
   position: relative;
   overflow: hidden;
-  border-radius: 10px; /* Match image border-radius */
-  box-shadow: 0 6px 15px var(--shadow-dark); /* More pronounced shadow */
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.5s ease; /* Added opacity transition for filtering */
+  border-radius: 10px;
+  box-shadow: 0 6px 15px var(--shadow-dark);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.5s ease;
 }
 
 .gallery-grid .gallery-item:hover {
-  transform: scale(1.04); /* Slightly larger zoom on hover */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7); /* Darker shadow on hover */
-  cursor: pointer; /* Indicate it's clickable */
+  transform: scale(1.04);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
 }
 
 .gallery-grid .gallery-item img {
   width: 100%;
-  height: 300px; /* Fixed height for gallery thumbnails */
-  object-fit: cover; /* Ensures images fill the space */
-  border-radius: 10px; /* Slightly more rounded corners */
-  display: block; /* Remove extra space below image */
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
 }
 
 /* Hidden state for filtered items */
 .gallery-grid .gallery-item.hidden {
   opacity: 0;
   transform: scale(0.8);
-  pointer-events: none; /* Make item unclickable when hidden */
-  height: 0; /* Collapse height to remove from flow */
-  margin: 0; /* Remove margin when hidden */
-  transition: opacity 0.5s ease, transform 0.5s ease, height 0s 0.5s, margin 0s 0.5s; /* Delay height/margin transition */
+  pointer-events: none;
+  height: 0;
+  margin: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease, height 0s 0.5s, margin 0s 0.5s;
 }
 /* Visible state for filtered items - reset properties */
 .gallery-grid .gallery-item:not(.hidden) {
-    height: 300px; /* Restore height */
-    margin-bottom: 25px; /* Restore margin-bottom if needed by grid gap */
-    transition: opacity 0.5s ease, transform 0.5s ease, height 0s, margin 0s; /* No delay on showing */
+    height: 300px;
+    margin-bottom: 25px;
+    transition: opacity 0.5s ease, transform 0.5s ease, height 0s, margin 0s;
 }
 
 
-/* Highlight Images (used on index.html) */
+/* Highlight Images (Used on index.html) */
 .highlight-imgs {
   display: flex;
   flex-wrap: wrap;
-  gap: 25px; /* Increased gap */
+  gap: 25px;
   justify-content: center;
-  margin-top: 30px; /* More space below heading */
+  margin-top: 30px;
 }
 
 .highlight-imgs img {
   max-width: 100%;
   height: auto;
   object-fit: cover;
-  border-radius: 10px; /* Slightly more rounded corners */
-  box-shadow: 0 6px 15px var(--shadow-dark); /* More pronounced shadow */
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Added box-shadow transition */
-  max-height: 450px; /* Slightly increased max-height */
+  border-radius: 10px;
+  box-shadow: 0 6px 15px var(--shadow-dark);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  max-height: 450px;
 }
 
 .highlight-imgs img:hover {
-  transform: scale(1.04); /* Slightly larger zoom on hover */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7); /* Darker shadow on hover */
+  transform: scale(1.04);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
 }
 
 /* Footer Section */
 footer {
   text-align: center;
-  padding: 30px 20px; /* Increased padding */
-  font-size: 15px; /* Slightly larger font size */
+  padding: 30px 20px;
+  font-size: 15px;
   color: var(--muted);
   border-top: 1px solid var(--medium-gray);
-  margin-top: 80px; /* More space above footer */
-  background-color: var(--dark-gray); /* Match header background */
+  margin-top: 80px;
+  background-color: var(--dark-gray);
 }
 
 /* Social Media Icons (Placeholder styles) */
@@ -362,7 +362,7 @@ footer {
 .social-links a {
   display: inline-block;
   margin: 0 10px;
-  font-size: 24px; /* Icon size */
+  font-size: 24px;
   color: var(--muted);
   transition: color 0.3s ease, transform 0.3s ease;
 }
@@ -372,24 +372,24 @@ footer {
   transform: translateY(-3px) scale(1.1);
 }
 
-/* Buttons */
+/* Buttons (Global Styles) */
 .button {
   background-color: var(--accent);
-  color: var(--background); /* Dark text on accent button */
-  padding: 12px 28px; /* Adjusted padding */
+  color: var(--background);
+  padding: 12px 28px;
   border: none;
-  border-radius: 25px; /* More rounded button */
+  border-radius: 25px;
   cursor: pointer;
   font-weight: 600;
-  text-transform: uppercase; /* Uppercase text */
-  letter-spacing: 0.05em; /* Letter spacing for buttons */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .button:hover {
-  background-color: #ff99aa; /* Slightly darker accent on hover */
-  transform: translateY(-3px); /* More pronounced lift on hover */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* More pronounced shadow on hover */
+  background-color: #ff99aa;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
 /* Utility Classes */
@@ -411,30 +411,30 @@ footer {
 
 /* Lightbox Styles */
 #lightbox-overlay {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stays in place even when scrolling */
+  display: none;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.9); /* Dark, semi-transparent background */
-  z-index: 1000; /* High z-index to appear on top of everything */
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
   justify-content: center;
   align-items: center;
-  opacity: 0; /* Start hidden for fade-in effect */
+  opacity: 0;
   transition: opacity 0.3s ease-in-out;
 }
 
 #lightbox-overlay.active {
-  display: flex; /* Show when active */
+  display: flex;
   opacity: 1;
 }
 
 #lightbox-container {
   position: relative;
-  max-width: 90%; /* Max width of the lightbox content */
-  max-height: 90%; /* Max height of the lightbox content */
-  background-color: var(--background); /* Background for the container */
+  max-width: 90%;
+  max-height: 90%;
+  background-color: var(--background);
   border-radius: 10px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
   display: flex;
@@ -442,20 +442,20 @@ footer {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  transform: scale(0.9); /* Start slightly smaller for scale-in effect */
+  transform: scale(0.9);
   transition: transform 0.3s ease-in-out;
 }
 
 #lightbox-overlay.active #lightbox-container {
-  transform: scale(1); /* Scale to normal size when active */
+  transform: scale(1);
 }
 
 #lightbox-image {
   max-width: 100%;
-  max-height: 80vh; /* Limit image height to viewport height */
+  max-height: 80vh;
   display: block;
   border-radius: 8px;
-  object-fit: contain; /* Ensures the entire image is visible within its bounds */
+  object-fit: contain;
   margin-bottom: 15px;
 }
 
@@ -477,27 +477,27 @@ footer {
   font-size: 2em;
   cursor: pointer;
   transition: color 0.3s ease, transform 0.3s ease;
-  z-index: 1001; /* Ensure close button is on top */
+  z-index: 1001;
 }
 
 #lightbox-close:hover {
   color: var(--accent);
-  transform: rotate(90deg); /* Spin effect on hover */
+  transform: rotate(90deg);
 }
 
 .lightbox-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for buttons */
+  background: rgba(0, 0, 0, 0.5);
   color: var(--text);
   border: none;
   padding: 15px;
   cursor: pointer;
   font-size: 2em;
-  border-radius: 50%; /* Circular buttons */
+  border-radius: 50%;
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-  z-index: 1001; /* Ensure nav buttons are on top */
+  z-index: 1001;
 }
 
 .lightbox-nav:hover {
@@ -514,12 +514,12 @@ footer {
   right: 15px;
 }
 
-/* Contact Page Styles */
+/* Contact Page Styles (Used on contact.html) */
 .contact-section {
-  max-width: 900px; /* Max width for the contact content */
-  margin: 60px auto; /* Center the section */
-  padding: 0 20px; /* Add padding for smaller screens */
-  text-align: center; /* Center the main heading and intro */
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 20px;
+  text-align: center;
 }
 
 .contact-intro {
@@ -533,22 +533,22 @@ footer {
 
 .contact-container {
   display: flex;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
-  gap: 40px; /* Space between form and details */
+  flex-wrap: wrap;
+  gap: 40px;
   justify-content: center;
-  align-items: flex-start; /* Align items to the top */
+  align-items: flex-start;
   margin-top: 40px;
 }
 
-.contact-form-wrapper,
+.contact-form-wrapper, /* Still included for completeness, though no longer used in contact.html */
 .contact-details-wrapper {
   background-color: var(--dark-gray);
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 15px var(--shadow-dark);
-  flex: 1; /* Allow items to grow and shrink */
-  min-width: 300px; /* Minimum width before wrapping */
-  text-align: left; /* Align text inside these wrappers to left */
+  flex: 1;
+  min-width: 300px;
+  text-align: left;
 }
 
 .contact-form-wrapper h2,
@@ -556,7 +556,7 @@ footer {
   color: var(--foreground);
   margin-top: 0;
   margin-bottom: 25px;
-  text-align: center; /* Center headings within wrappers */
+  text-align: center;
 }
 
 .form-group {
@@ -573,7 +573,7 @@ footer {
 .contact-form input[type="text"],
 .contact-form input[type="email"],
 .contact-form textarea {
-  width: calc(100% - 20px); /* Account for padding */
+  width: calc(100% - 20px);
   padding: 12px 10px;
   border: 1px solid var(--medium-gray);
   border-radius: 5px;
@@ -593,17 +593,17 @@ footer {
 }
 
 .contact-form textarea {
-  resize: vertical; /* Allow vertical resizing */
+  resize: vertical;
   min-height: 120px;
 }
 
 .contact-form .button {
-  width: 100%; /* Full width button */
+  width: 100%;
   margin-top: 10px;
 }
 
 .contact-links {
-  list-style: none; /* Remove bullet points */
+  list-style: none;
   padding: 0;
   margin: 0;
 }
@@ -613,21 +613,21 @@ footer {
 }
 
 .contact-links a {
-  display: flex; /* Align icon and text */
+  display: flex;
   align-items: center;
-  color: var(--text); /* Default text color */
+  color: var(--text);
   font-size: 1.1em;
 }
 
 .contact-links a i {
   margin-right: 10px;
-  color: var(--accent); /* Icon color */
+  color: var(--accent);
   font-size: 1.3em;
 }
 
 .contact-links a:hover {
-  color: var(--accent); /* Highlight link on hover */
-  transform: translateX(5px); /* Subtle slide effect */
+  color: var(--accent);
+  transform: translateX(5px);
 }
 
 .contact-details-wrapper p {
@@ -643,8 +643,7 @@ footer {
   letter-spacing: 0.03em;
 }
 
-
-/* NEW/MODIFIED: Services Page Styles with Badge Fix */
+/* Services Page Styles (Used on services.html) */
 .services-section {
   max-width: 900px;
   margin: 60px auto;
@@ -664,9 +663,9 @@ footer {
 .service-card-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px; /* Slightly reduced gap for cards */
+  gap: 30px;
   justify-content: center;
-  align-items: stretch; /* Make cards stretch to same height */
+  align-items: stretch;
   margin-top: 40px;
 }
 
@@ -676,12 +675,12 @@ footer {
   border-radius: 10px;
   box-shadow: 0 4px 15px var(--shadow-dark);
   flex: 1;
-  min-width: 280px; /* Adjusted min-width for cards */
-  max-width: 45%; /* Max width to allow two cards per row on larger screens */
+  min-width: 280px;
+  max-width: 45%;
   text-align: center;
-  display: flex; /* Use flexbox for vertical alignment within card */
+  display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Push button to bottom */
+  justify-content: space-between;
   position: relative; /* IMPORTANT: Establish positioning context for the badge */
 }
 
@@ -689,12 +688,12 @@ footer {
   color: var(--foreground);
   margin-top: 0;
   margin-bottom: 15px;
-  font-size: 1.6em; /* Slightly larger heading */
+  font-size: 1.6em;
   letter-spacing: 0.03em;
 }
 
 .service-card .price {
-  font-size: 2.8em; /* Larger price text */
+  font-size: 2.8em;
   font-weight: 700;
   color: var(--accent);
   margin-bottom: 10px;
@@ -717,7 +716,7 @@ footer {
   list-style: none;
   padding: 0;
   margin: 20px 0;
-  text-align: left; /* Align list items left */
+  text-align: left;
 }
 
 .service-card ul li {
@@ -734,36 +733,39 @@ footer {
 }
 
 .service-card .button {
-  margin-top: auto; /* Push button to the bottom */
+  margin-top: auto;
   width: 100%;
+  max-width: 250px; /* NEW: Limit the maximum width of the button */
+  margin-left: auto; /* NEW: Center the button */
+  margin-right: auto; /* NEW: Center the button */
 }
 
 .service-card.highlight {
-  border: 2px solid var(--accent); /* Stronger border for highlight card */
-  box-shadow: 0 0 25px var(--shadow-light); /* More prominent glow for highlight */
-  background-color: #242424; /* Slightly different background for highlight */
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 25px var(--shadow-light);
+  background-color: #242424;
 }
 
 .badge {
-  position: absolute; /* Changed to absolute positioning */
-  top: -15px; /* Adjust as needed to position above the card */
-  right: 15px; /* Position from the right edge */
+  position: absolute;
+  top: -15px;
+  right: 15px;
   background-color: var(--accent);
   color: var(--background);
   padding: 5px 12px;
-  border-radius: 15px; /* More rounded */
+  border-radius: 15px;
   font-size: 0.8em;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  z-index: 5; /* Ensure it's above the card content */
-  transform: rotate(5deg); /* Slight rotation for a "badge" effect */
+  z-index: 5;
+  transform: rotate(5deg);
 }
 
 .workflow-info {
   max-width: 700px;
-  margin: 60px auto 30px auto; /* More spacing */
+  margin: 60px auto 30px auto;
   padding: 0 20px;
   text-align: center;
 }
@@ -850,7 +852,7 @@ footer {
     max-width: 400px; /* Limit width of stacked cards */
   }
   .badge {
-    top: -10px; /* Adjust badge position for smaller screens */
+    top: -10px;
     right: 10px;
   }
 }
