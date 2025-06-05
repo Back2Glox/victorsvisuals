@@ -1,4 +1,4 @@
-/* style.css - Complete and Updated Version with img-comparison-slider Styles */
+/* style.css - Complete and Updated Version with Constrained Slider Height */
 
 /* Google Fonts Import: Poppins with various weights */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
@@ -786,9 +786,8 @@ footer {
 .slider-wrapper {
   margin: 25px auto; /* Centering and spacing */
   width: 100%;
-  /* Ensures aspect ratio is maintained by the slider itself */
-  /* If your images are 3:2 (e.g., 600x400), set max-height or min-height */
-  /* For responsiveness, the slider will adapt to its parent container */
+  /* Define a max-width if the images are fixed aspect ratio and you want to constrain it */
+  max-width: 600px; /* Example max-width, adjust as needed based on your images */
 }
 
 .custom-image-comparison-slider {
@@ -797,7 +796,13 @@ footer {
   display: block; /* Important for full width */
   border-radius: 8px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-  /* Override default slider styles if needed */
+
+  /* NEW: Set a maximum height for the slider to prevent it from growing too large */
+  max-height: 400px; /* Adjust this value to your desired maximum height */
+  /* This ensures the slider itself doesn't exceed this height.
+     The object-fit: cover on images inside will handle cropping if needed. */
+
+  /* Override default slider styles if needed via CSS variables */
   --divider-width: 4px; /* Thickness of the handle bar */
   --divider-color: var(--foreground); /* Color of the handle bar */
   --handle-radius: 50%; /* Make the handle round */
@@ -815,20 +820,9 @@ footer {
 
 .custom-image-comparison-slider img {
   object-fit: cover; /* Ensures images cover the area within the slider */
+  width: 100%; /* Ensure images take full width within the slider */
+  height: 100%; /* Ensure images take full height within the slider */
 }
-
-/* Customize the "BEFORE" and "AFTER" labels if you need more control than the default vars */
-/* The library creates slots for these, but direct styling might be needed if defaults aren't enough */
-.custom-image-comparison-slider > :first-child[slot="before"] + * + div {
-  /* This is the handle, and its pseudo-elements are the labels */
-  /* This is a complex selector to target the labels inside the custom element,
-     it might be easier to use the library's CSS variables if possible.
-     For this specific library, the labels are part of the Shadow DOM,
-     and best styled via CSS variables like --default-label-background etc. as above.
-     The HTML span tags are placeholders and won't be directly rendered by the library.
-  */
-}
-
 
 .comparison-caption {
   font-size: 0.9em;
@@ -914,6 +908,7 @@ footer {
   /* Image comparison adjustments for tablets */
   .custom-image-comparison-slider {
     /* The library handles responsiveness internally quite well */
+    max-height: 300px; /* Adjust for smaller screens if needed */
   }
 }
 
@@ -1019,6 +1014,10 @@ footer {
   }
   .workflow-info h3 {
     font-size: 1.3em;
+  }
+  /* Image comparison adjustments for mobile */
+  .custom-image-comparison-slider {
+    max-height: 250px; /* Adjust further for small mobile screens if needed */
   }
 }
 
