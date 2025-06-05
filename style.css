@@ -1,4 +1,4 @@
-/* style.css - Complete and Updated Version with Fixed Slider Alignment */
+/* style.css - Complete and Updated Version with Fixed Slider Alignment and Responsiveness */
 
 /* Google Fonts Import: Poppins with various weights */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
@@ -786,55 +786,43 @@ footer {
 .image-comparison-container {
   position: relative;
   width: 100%;
-  /* Ensure aspect ratio is consistent with your actual images (e.g., 600x400 -> 66.66%) */
-  /* If your images are 3:2, this padding-top is correct. Adjust if different. */
-  padding-top: 66.66%;
-  overflow: hidden;
+  /* Maintain aspect ratio. If your images are 3:2 (e.g., 600x400), this is 66.66%. Adjust if different. */
+  padding-top: 66.66%; 
+  overflow: hidden; /* This is crucial for clipping the 'before' image */
   border-radius: 8px;
   margin: 25px auto;
   cursor: ew-resize;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
 
-.comparison-image {
+.comparison-image-after,
+.comparison-image-before {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100%; /* Both images take up 100% of the container's width */
   height: 100%;
-  object-fit: cover; /* Ensures the image covers the container */
+  object-fit: cover; /* Ensures images cover the area without distortion */
   display: block;
 }
 
-.comparison-overlay {
-  position: absolute;
-  top: 0;
-  left: 0; /* Starting point for the overlay, covers the 'before' part */
-  width: 50%; /* Default starting point: half of the 'before' image visible */
-  height: 100%;
-  overflow: hidden; /* This clips the 'before' image */
-}
-
-.comparison-overlay .comparison-image {
-  position: absolute;
-  top: 0;
-  left: 0; /* CRITICAL FIX: Ensure the 'before' image inside the overlay is always at left: 0 */
-  width: 100%; /* Must match the width of the main container, not the overlay */
-  height: 100%;
-  object-fit: cover;
-  object-position: left; /* CRITICAL FIX: Ensure the image is pinned to the left when clipped */
+/* The 'before' image is the one that gets clipped by its own width */
+.comparison-image-before {
+  /* Its width will be controlled by JavaScript for the sliding effect */
+  /* Ensure it's above the 'after' image */
+  z-index: 2; 
 }
 
 .comparison-handle {
   position: absolute;
   top: 0;
   left: 50%; /* Start in the middle */
-  width: 4px;
+  width: 4px; /* Handle bar thickness */
   height: 100%;
   background-color: var(--foreground);
-  transform: translateX(-50%);
+  transform: translateX(-50%); /* Center the handle on its 'left' position */
   cursor: ew-resize;
-  z-index: 10;
+  z-index: 10; /* Ensure handle is above both images */
   border-radius: 2px;
   display: flex;
   align-items: center;
@@ -845,13 +833,13 @@ footer {
 .comparison-handle::after {
   content: '';
   position: absolute;
-  width: 20px;
+  width: 20px; /* Width of the little draggable circles */
   height: 20px;
   background-color: var(--foreground);
   border-radius: 50%;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 11;
+  z-index: 11; /* Ensure circles are above the handle bar */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
   transition: background-color 0.2s ease;
 }
@@ -878,7 +866,7 @@ footer {
   font-size: 0.9em;
   font-weight: 500;
   border-radius: 5px;
-  z-index: 2;
+  z-index: 2; /* Labels above images but below handle */
   text-transform: uppercase;
 }
 
