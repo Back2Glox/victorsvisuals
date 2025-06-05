@@ -1,4 +1,4 @@
-/* style.css - Complete and Updated Version with True Before/After Slider Styles */
+/* style.css - Complete and Updated Version with Fixed Slider Alignment */
 
 /* Google Fonts Import: Poppins with various weights */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
@@ -782,16 +782,17 @@ footer {
   line-height: 1.7;
 }
 
-/* NEW: Image Comparison Slider Styles for two separate images */
+/* UPDATED: Image Comparison Slider Styles for two separate images */
 .image-comparison-container {
   position: relative;
   width: 100%;
-  /* Assuming a 3:2 aspect ratio for the images, e.g., 600x400. Adjust if your images have a different ratio. */
-  padding-top: 66.66%; /* (image-height / image-width) * 100% */
+  /* Ensure aspect ratio is consistent with your actual images (e.g., 600x400 -> 66.66%) */
+  /* If your images are 3:2, this padding-top is correct. Adjust if different. */
+  padding-top: 66.66%;
   overflow: hidden;
   border-radius: 8px;
   margin: 25px auto;
-  cursor: ew-resize; /* East-west resize cursor */
+  cursor: ew-resize;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
 
@@ -808,31 +809,30 @@ footer {
 .comparison-overlay {
   position: absolute;
   top: 0;
-  /* NEW: Start fully covering the 'after' image */
-  left: 0;
+  left: 0; /* Starting point for the overlay, covers the 'before' part */
   width: 50%; /* Default starting point: half of the 'before' image visible */
   height: 100%;
-  overflow: hidden; /* This is what clips the 'before' image */
+  overflow: hidden; /* This clips the 'before' image */
 }
 
 .comparison-overlay .comparison-image {
-  /* This image is the 'BEFORE' image, and it must always align with the base 'AFTER' image */
   position: absolute;
   top: 0;
-  left: 0; /* Keep this at 0, the clipping will be done by the overlay's width */
+  left: 0; /* CRITICAL FIX: Ensure the 'before' image inside the overlay is always at left: 0 */
   width: 100%; /* Must match the width of the main container, not the overlay */
   height: 100%;
   object-fit: cover;
+  object-position: left; /* CRITICAL FIX: Ensure the image is pinned to the left when clipped */
 }
 
 .comparison-handle {
   position: absolute;
   top: 0;
   left: 50%; /* Start in the middle */
-  width: 4px; /* Handle bar thickness */
+  width: 4px;
   height: 100%;
-  background-color: var(--foreground); /* Handle color */
-  transform: translateX(-50%); /* Center the handle */
+  background-color: var(--foreground);
+  transform: translateX(-50%);
   cursor: ew-resize;
   z-index: 10;
   border-radius: 2px;
@@ -845,7 +845,7 @@ footer {
 .comparison-handle::after {
   content: '';
   position: absolute;
-  width: 20px; /* Width of the little draggable circles */
+  width: 20px;
   height: 20px;
   background-color: var(--foreground);
   border-radius: 50%;
@@ -857,16 +857,16 @@ footer {
 }
 
 .comparison-handle::before {
-  left: -10px; /* Position to the left of the handle bar */
+  left: -10px;
 }
 
 .comparison-handle::after {
-  right: -10px; /* Position to the right of the handle bar */
+  right: -10px;
 }
 
 .comparison-handle:hover::before,
 .comparison-handle:hover::after {
-  background-color: var(--accent); /* Change color on hover */
+  background-color: var(--accent);
 }
 
 .comparison-label {
